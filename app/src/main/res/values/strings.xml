@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">AppThiLaiXe</string>
+
+    <!-- Home Screen -->
+    <string name="home_subtitle">Ôn tập và thi lái xe dễ dàng</string>
+    <string name="start_exam">Bắt Đầu Thi Thử</string>
+    <string name="learn_now">Học Ngay</string>
+    <string name="why_choose_us">Tại Sao Chọn AppThiLaiXe?</string>
+
+    <!-- Benefits -->
+    <string name="benefit_questions">1000+ Câu Hỏi</string>
+    <string name="benefit_questions_desc">Ngân hàng câu hỏi đầy đủ theo chuẩn thi lái xe</string>
+
+    <string name="benefit_timer">Thi Thử Thực Tế</string>
+    <string name="benefit_timer_desc">Đếm ngược thời gian như thi thật, chuẩn bị tốt nhất</string>
+
+    <string name="benefit_stats">Thống Kê Chi Tiết</string>
+    <string name="benefit_stats_desc">Theo dõi tiến độ học tập và điểm yếu của bạn</string>
+
+    <string name="benefit_offline">Học Offline</string>
+    <string name="benefit_offline_desc">Học mà không cần kết nối internet, tiện lợi mọi lúc</string>
+
+    <!-- Stats -->
+    <string name="stat_questions">1000+</string>
+    <string name="stat_questions_label">Câu Hỏi</string>
+
+    <string name="stat_success_rate">95%</string>
+    <string name="stat_success_rate_label">Tỷ Lệ Đậu</string>
+
+    <string name="stat_users">50K+</string>
+    <string name="stat_users_label">Người Dùng</string>
 </resources>
