@@ -14,4 +14,9 @@
 
     <!-- Background Colors -->
     <color name="light_gray">#F5F5F5</color>
+    <color name="background_light">#FAFAFA</color>
+
+    <!-- Additional Colors -->
+    <color name="primary_dark">#1565C0</color>
+    <color name="accent_color">#FF9800</color>
 </resources>

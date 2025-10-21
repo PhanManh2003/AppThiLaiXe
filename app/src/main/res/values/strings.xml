@@ -29,4 +29,18 @@
 
     <string name="stat_users">50K+</string>
     <string name="stat_users_label">Người Dùng</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">Đăng Nhập</string>
+    <string name="login_subtitle">Chào mừng bạn trở lại!</string>
+    <string name="email_hint">Email hoặc Số điện thoại</string>
+    <string name="password_hint">Mật khẩu</string>
+    <string name="login_button">Đăng Nhập</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
+    <string name="no_account">Chưa có tài khoản?</string>
+    <string name="register_now">Đăng ký ngay</string>
+    <string name="or_continue_with">Hoặc tiếp tục với</string>
+    <string name="login_with_google">Google</string>
+    <string name="login_with_facebook">Facebook</string>
+    <string name="skip_login">Bỏ qua</string>
 </resources>
