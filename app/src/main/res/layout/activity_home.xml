@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -42,9 +42,14 @@
         <!-- Main CTA Button -->
         <Button
             android:id="@+id/btn_start_exam"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="56dp"
-            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center"
+            android:minWidth="280dp"
             android:text="@string/start_exam"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -85,7 +90,7 @@
                     android:contentDescription="@string/benefit_questions"
                     android:scaleType="centerInside"
                     android:layout_marginEnd="16dp"
-                    android:tint="@color/primary_blue" />
+                    tools:ignore="ImageContrastCheck" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -105,8 +110,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/benefit_questions_desc"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_gray"
                         android:layout_marginTop="4dp" />
 
                 </LinearLayout>
@@ -129,7 +134,7 @@
                     android:contentDescription="@string/benefit_timer"
                     android:scaleType="centerInside"
                     android:layout_marginEnd="16dp"
-                    android:tint="@color/primary_orange" />
+                    tools:ignore="ImageContrastCheck" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -149,8 +154,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/benefit_timer_desc"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_gray"
                         android:layout_marginTop="4dp" />
 
                 </LinearLayout>
@@ -192,8 +197,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/benefit_stats_desc"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_gray"
                         android:layout_marginTop="4dp" />
 
                 </LinearLayout>
@@ -235,8 +240,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/benefit_offline_desc"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_gray"
                         android:layout_marginTop="4dp" />
 
                 </LinearLayout>
@@ -274,7 +279,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_questions_label"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:textColor="@color/text_dark"
                     android:layout_marginTop="4dp" />
 
@@ -299,7 +304,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_success_rate_label"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:textColor="@color/text_dark"
                     android:layout_marginTop="4dp" />
 
@@ -324,7 +329,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/stat_users_label"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:textColor="@color/text_dark"
                     android:layout_marginTop="4dp" />
 
@@ -335,9 +340,14 @@
         <!-- Bottom CTA -->
         <Button
             android:id="@+id/btn_learn_now"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="56dp"
-            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center"
+            android:minWidth="280dp"
             android:text="@string/learn_now"
             android:textSize="16sp"
             android:textStyle="bold"

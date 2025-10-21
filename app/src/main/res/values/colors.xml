@@ -4,9 +4,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Primary Colors -->
-    <color name="primary_blue">#1E88E5</color>
-    <color name="primary_green">#4CAF50</color>
-    <color name="primary_orange">#FF9800</color>
+    <color name="primary_blue">#0D47A1</color>
+    <color name="primary_green">#2E7D32</color>
+    <color name="primary_orange">#E65100</color>
 
     <!-- Text Colors -->
     <color name="text_dark">#212121</color>
