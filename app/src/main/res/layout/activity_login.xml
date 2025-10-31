@@ -23,14 +23,21 @@
             android:layout_marginTop="40dp"
             android:layout_marginBottom="32dp">
 
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/ic_car"
-                android:contentDescription="@string/app_name"
+            <LinearLayout
+                android:layout_width="160dp"
+                android:layout_height="160dp"
                 android:background="@drawable/bg_card_white"
-                android:padding="16dp"
-                android:elevation="4dp" />
+                android:gravity="center"
+                android:elevation="4dp">
+
+                <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/ic_car"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerInside" />
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"

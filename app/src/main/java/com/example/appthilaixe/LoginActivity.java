@@ -53,8 +53,10 @@ public class LoginActivity extends AppCompatActivity {
         });
         
         tvRegister.setOnClickListener(v -> {
-            // TODO: Navigate to register screen
-            Toast.makeText(LoginActivity.this, "Chức năng đang phát triển", Toast.LENGTH_SHORT).show();
+            // Navigate to register screen
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+            finish();
         });
         
         tvSkip.setOnClickListener(v -> {

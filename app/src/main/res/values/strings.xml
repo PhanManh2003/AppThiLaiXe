@@ -43,4 +43,38 @@
     <string name="login_with_google">Google</string>
     <string name="login_with_facebook">Facebook</string>
     <string name="skip_login">Bỏ qua</string>
+
+    <!-- Register Screen -->
+    <string name="register_title">Đăng Ký</string>
+    <string name="register_subtitle">Tạo tài khoản để bắt đầu học</string>
+    <string name="full_name_hint">Họ và Tên</string>
+    <string name="phone_hint">Số Điện Thoại</string>
+    <string name="confirm_password_hint">Xác Nhận Mật Khẩu</string>
+    <string name="register_button">Đăng Ký</string>
+    <string name="agree_terms">Tôi đồng ý với</string>
+    <string name="terms_conditions">Điều khoản &amp; Điều kiện</string>
+    <string name="have_account">Đã có tài khoản?</string>
+    <string name="login_now">Đăng nhập ngay</string>
+
+    <!-- Exam Screen -->
+    <string name="exam_title">Thi Thử</string>
+    <string name="back">Quay Lại</string>
+    <string name="timer">Thời Gian</string>
+    <string name="progress">Tiến Độ</string>
+    <string name="question_number">Câu 1</string>
+    <string name="question_image">Hình Ảnh Câu Hỏi</string>
+    <string name="selected">Đã Chọn</string>
+    <string name="previous">Quay Lại</string>
+    <string name="next">Tiếp Theo</string>
+
+    <!-- Learning Screen -->
+    <string name="learning_title">Học Tập</string>
+    <string name="learning_subtitle">Chọn danh mục để bắt đầu học</string>
+    <string name="search_category">Tìm kiếm danh mục...</string>
+    <string name="category">Danh Mục</string>
+    <string name="questions">Câu Hỏi</string>
+    <string name="completed">Hoàn Thành</string>
+    <string name="start">Bắt Đầu</string>
+    <string name="empty">Trống</string>
+    <string name="no_categories">Không có danh mục nào</string>
 </resources>

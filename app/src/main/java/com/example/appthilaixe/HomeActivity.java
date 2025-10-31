@@ -29,15 +29,15 @@ public class HomeActivity extends AppCompatActivity {
 
         // Set click listeners
         btnStartExam.setOnClickListener(v -> {
-            // TODO: Navigate to exam activity
-            // Intent intent = new Intent(HomeActivity.this, ExamActivity.class);
-            // startActivity(intent);
+            // Navigate to exam activity
+            Intent intent = new Intent(HomeActivity.this, ExamActivity.class);
+            startActivity(intent);
         });
 
         btnLearnNow.setOnClickListener(v -> {
-            // TODO: Navigate to learning activity
-            // Intent intent = new Intent(HomeActivity.this, LearningActivity.class);
-            // startActivity(intent);
+            // Navigate to learning activity
+            Intent intent = new Intent(HomeActivity.this, LearningActivity.class);
+            startActivity(intent);
         });
     }
 }
