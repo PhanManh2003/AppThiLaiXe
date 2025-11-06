@@ -77,4 +77,19 @@
     <string name="start">Bắt Đầu</string>
     <string name="empty">Trống</string>
     <string name="no_categories">Không có danh mục nào</string>
+
+    <!-- Exam Result Screen -->
+    <string name="exam_result_title">Kết Quả Thi</string>
+    <string name="exam_type">Thi Thử Lái Xe</string>
+    <string name="passed">ĐẠT</string>
+    <string name="failed">CHƯA ĐẠT</string>
+    <string name="statistics_title">Thống Kê Chi Tiết</string>
+    <string name="total_questions_label">Tổng Số Câu</string>
+    <string name="correct_answers_label">Câu Đúng</string>
+    <string name="wrong_answers_label">Câu Sai</string>
+    <string name="skipped_questions_label">Bỏ Qua</string>
+    <string name="time_taken_label">Thời Gian Hoàn Thành</string>
+    <string name="view_answers">Xem Đáp Án</string>
+    <string name="retake_exam">Thi Lại</string>
+    <string name="go_home">Về Trang Chủ</string>
 </resources>

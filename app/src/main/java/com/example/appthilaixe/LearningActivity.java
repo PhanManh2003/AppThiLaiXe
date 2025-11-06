@@ -124,11 +124,11 @@ public class LearningActivity extends AppCompatActivity implements CategoryAdapt
 
     @Override
     public void onStartClick(Category category) {
-        // TODO: Navigate to learning detail or exam screen
-        Toast.makeText(this, "Bắt đầu học: " + category.getName(), Toast.LENGTH_SHORT).show();
-        // Intent intent = new Intent(LearningActivity.this, LearningDetailActivity.class);
-        // intent.putExtra("category_id", category.getId());
-        // startActivity(intent);
+        // Navigate to CategoryQuestionsActivity with category information
+        Intent intent = new Intent(LearningActivity.this, CategoryQuestionsActivity.class);
+        intent.putExtra("category_id", category.getId());
+        intent.putExtra("category_name", category.getName());
+        startActivity(intent);
     }
 }
 

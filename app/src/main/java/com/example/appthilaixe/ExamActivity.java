@@ -32,6 +32,12 @@ public class ExamActivity extends AppCompatActivity {
     private int totalQuestions = 40;
     private String selectedAnswer = "";
     private long timeLeftInMillis = 45 * 60 * 1000; // 45 minutes
+    private long initialTimeInMillis = 45 * 60 * 1000; // Store initial time
+
+    // Track answers for result calculation
+    private int correctAnswersCount = 0;
+    private int wrongAnswersCount = 0;
+    private int skippedQuestionsCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +98,20 @@ public class ExamActivity extends AppCompatActivity {
 
         updateProgress();
         clearSelection();
+        updateNavigationButtons();
+    }
+
+    private void updateNavigationButtons() {
+        // Update Previous button
+        btnPrevious.setEnabled(currentQuestion > 1);
+        btnPrevious.setAlpha(currentQuestion > 1 ? 1.0f : 0.5f);
+
+        // Update Next button text
+        if (currentQuestion == totalQuestions) {
+            btnNext.setText("Hoàn Thành");
+        } else {
+            btnNext.setText(R.string.next);
+        }
     }
 
     private void selectAnswer(String answer) {
@@ -130,13 +150,21 @@ public class ExamActivity extends AppCompatActivity {
     }
 
     private void nextQuestion() {
-        if (currentQuestion < totalQuestions) {
-            currentQuestion++;
-            loadQuestion();
-        } else {
+        // Check if we're at the last question
+        if (currentQuestion >= totalQuestions) {
+            // Already at last question, finish exam
             stopTimer();
-            Toast.makeText(this, "Hoàn thành bài thi!", Toast.LENGTH_SHORT).show();
-            // TODO: Navigate to result screen
+            navigateToResult();
+            return;
+        }
+
+        // Move to next question
+        currentQuestion++;
+        loadQuestion();
+
+        // If we just moved to the last question, change button text
+        if (currentQuestion == totalQuestions) {
+            btnNext.setText("Hoàn Thành");
         }
     }
 
@@ -144,6 +172,7 @@ public class ExamActivity extends AppCompatActivity {
         if (currentQuestion > 1) {
             currentQuestion--;
             loadQuestion();
+            updateNavigationButtons();
         }
     }
 
@@ -164,7 +193,8 @@ public class ExamActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 Toast.makeText(ExamActivity.this, "Hết thời gian!", Toast.LENGTH_SHORT).show();
-                // TODO: Navigate to result screen
+                // Navigate to result screen
+                navigateToResult();
             }
         }.start();
     }
@@ -180,6 +210,31 @@ public class ExamActivity extends AppCompatActivity {
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
+    }
+
+    private void navigateToResult() {
+        // Calculate time taken
+        long timeTakenInMillis = initialTimeInMillis - timeLeftInMillis;
+        int minutes = (int) (timeTakenInMillis / 1000) / 60;
+        int seconds = (int) (timeTakenInMillis / 1000) % 60;
+        String timeTaken = String.format("%02d:%02d", minutes, seconds);
+
+        // TODO: In a real implementation, calculate actual correct/wrong/skipped answers
+        // For now, use sample data based on random simulation
+        correctAnswersCount = (int) (totalQuestions * 0.75); // 75% correct as sample
+        wrongAnswersCount = totalQuestions - correctAnswersCount;
+        skippedQuestionsCount = 0;
+
+        // Create intent and pass data
+        Intent intent = new Intent(ExamActivity.this, ExamResultActivity.class);
+        intent.putExtra("total_questions", totalQuestions);
+        intent.putExtra("correct_answers", correctAnswersCount);
+        intent.putExtra("wrong_answers", wrongAnswersCount);
+        intent.putExtra("skipped_questions", skippedQuestionsCount);
+        intent.putExtra("time_taken", timeTaken);
+
+        startActivity(intent);
+        finish();
     }
 
     @Override
