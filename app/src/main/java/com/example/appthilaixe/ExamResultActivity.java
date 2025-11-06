@@ -14,6 +14,10 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.example.appthilaixe.models.AnswerReview;
+
+import java.util.ArrayList;
+
 public class ExamResultActivity extends AppCompatActivity {
 
     // UI Components
@@ -32,6 +36,7 @@ public class ExamResultActivity extends AppCompatActivity {
     private String timeTaken;
     private boolean isPassed;
     private int percentage;
+    private ArrayList<AnswerReview> answerReviews;
 
     // Pass threshold (80% or 21/25 for standard driving test)
     private static final int PASS_PERCENTAGE = 80;
@@ -68,10 +73,14 @@ public class ExamResultActivity extends AppCompatActivity {
         wrongAnswers = intent.getIntExtra("wrong_answers", 0);
         skippedQuestions = intent.getIntExtra("skipped_questions", 0);
         timeTaken = intent.getStringExtra("time_taken");
+        answerReviews = (ArrayList<AnswerReview>) intent.getSerializableExtra("answer_reviews");
 
         // Default time if not provided
         if (timeTaken == null || timeTaken.isEmpty()) {
             timeTaken = "00:00";
+        }
+        if (answerReviews == null) {
+            answerReviews = new ArrayList<>();
         }
     }
 
@@ -161,8 +170,14 @@ public class ExamResultActivity extends AppCompatActivity {
     private void setClickListeners() {
         // View answers button
         btnViewAnswers.setOnClickListener(v -> {
-            // TODO: Navigate to answer review screen
-            Toast.makeText(this, "Chức năng xem đáp án đang phát triển", Toast.LENGTH_SHORT).show();
+            if (answerReviews == null || answerReviews.isEmpty()) {
+                Toast.makeText(this, "Không có dữ liệu đáp án để xem lại", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Intent intent = new Intent(ExamResultActivity.this, AnswerReviewActivity.class);
+            intent.putExtra("title", "Kết quả thi");
+            intent.putExtra("answers", answerReviews);
+            startActivity(intent);
         });
 
         // Retake exam button

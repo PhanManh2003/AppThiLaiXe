@@ -16,6 +16,10 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.example.appthilaixe.models.AnswerReview;
+
+import java.util.ArrayList;
+
 public class CategoryQuestionResultActivity extends AppCompatActivity {
 
     // UI Components
@@ -34,6 +38,7 @@ public class CategoryQuestionResultActivity extends AppCompatActivity {
     private int correctAnswers;
     private int wrongAnswers;
     private int percentage;
+    private ArrayList<AnswerReview> answerReviews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +61,14 @@ public class CategoryQuestionResultActivity extends AppCompatActivity {
         totalQuestions = intent.getIntExtra("total_questions", 0);
         correctAnswers = intent.getIntExtra("correct_answers", 0);
         wrongAnswers = intent.getIntExtra("wrong_answers", 0);
+        answerReviews = (ArrayList<AnswerReview>) intent.getSerializableExtra("answer_reviews");
 
         // Default values if not provided
         if (categoryName == null || categoryName.isEmpty()) {
             categoryName = "Danh mục học tập";
+        }
+        if (answerReviews == null) {
+            answerReviews = new ArrayList<>();
         }
     }
 
@@ -140,8 +149,14 @@ public class CategoryQuestionResultActivity extends AppCompatActivity {
     private void setClickListeners() {
         // Review answers button
         btnReviewAnswers.setOnClickListener(v -> {
-            // TODO: Navigate to answer review screen
-            Toast.makeText(this, "Chức năng xem lại đáp án đang phát triển", Toast.LENGTH_SHORT).show();
+            if (answerReviews == null || answerReviews.isEmpty()) {
+                Toast.makeText(this, "Không có dữ liệu đáp án để xem lại", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Intent intent = new Intent(CategoryQuestionResultActivity.this, AnswerReviewActivity.class);
+            intent.putExtra("title", categoryName);
+            intent.putExtra("answers", answerReviews);
+            startActivity(intent);
         });
 
         // Continue learning button - restart the same category

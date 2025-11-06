@@ -43,6 +43,9 @@
             android:name=".CategoryQuestionResultActivity"
             android:exported="false" />
         <activity
+            android:name=".AnswerReviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" />
     </application>

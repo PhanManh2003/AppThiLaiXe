@@ -16,6 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.appthilaixe.models.AnswerReview;
 import com.example.appthilaixe.models.Question;
 
 import java.util.ArrayList;
@@ -274,6 +275,14 @@ public class CategoryQuestionsActivity extends AppCompatActivity {
         // Calculate results
         calculateAnswers();
 
+        // Create answer review list
+        ArrayList<AnswerReview> answerReviews = new ArrayList<>();
+        for (int i = 0; i < questions.size(); i++) {
+            Question question = questions.get(i);
+            String userAnswer = userAnswers.get(i);
+            answerReviews.add(new AnswerReview(question, userAnswer));
+        }
+
         // Create intent and pass data
         Intent intent = new Intent(CategoryQuestionsActivity.this, CategoryQuestionResultActivity.class);
         intent.putExtra("category_id", categoryId);
@@ -281,6 +290,7 @@ public class CategoryQuestionsActivity extends AppCompatActivity {
         intent.putExtra("total_questions", questions.size());
         intent.putExtra("correct_answers", correctAnswersCount);
         intent.putExtra("wrong_answers", wrongAnswersCount);
+        intent.putExtra("answer_reviews", answerReviews);
 
         startActivity(intent);
         finish();

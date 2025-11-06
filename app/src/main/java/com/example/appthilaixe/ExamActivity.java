@@ -17,6 +17,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.appthilaixe.models.AnswerReview;
+import com.example.appthilaixe.models.Question;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ExamActivity extends AppCompatActivity {
 
     private TextView tvTimer, tvProgress, tvQuestion;
@@ -39,6 +47,10 @@ public class ExamActivity extends AppCompatActivity {
     private int wrongAnswersCount = 0;
     private int skippedQuestionsCount = 0;
 
+    // Store questions and user answers
+    private List<Question> questions;
+    private Map<Integer, String> userAnswers = new HashMap<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +58,7 @@ public class ExamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_exam);
 
         initViews();
+        loadQuestions();
         setClickListeners();
         loadQuestion();
         startTimer();
@@ -73,6 +86,22 @@ public class ExamActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
     }
 
+    private void loadQuestions() {
+        // TODO: Load questions from database
+        // For now, create sample questions
+        questions = new ArrayList<>();
+
+        // Add 40 sample questions for exam
+        for (int i = 1; i <= totalQuestions; i++) {
+            questions.add(new Question(
+                i, 0,
+                "Câu hỏi số " + i + ": Biển báo này có ý nghĩa gì?",
+                "Cấm đi vào", "Cấm dừng", "Cấm quay đầu", "Cấm rẽ phải",
+                "A", "Đây là giải thích cho câu hỏi số " + i
+            ));
+        }
+    }
+
     private void setClickListeners() {
         btnBack.setOnClickListener(v -> {
             stopTimer();
@@ -89,15 +118,24 @@ public class ExamActivity extends AppCompatActivity {
     }
 
     private void loadQuestion() {
-        // TODO: Load question from database
-        tvQuestion.setText("Biển báo này có ý nghĩa gì?");
-        tvOptionA.setText("Cấm đi vào");
-        tvOptionB.setText("Cấm dừng");
-        tvOptionC.setText("Cấm quay đầu");
-        tvOptionD.setText("Cấm rẽ phải");
+        if (questions == null || questions.isEmpty()) return;
+
+        Question question = questions.get(currentQuestion - 1);
+        tvQuestion.setText(question.getQuestionText());
+        tvOptionA.setText(question.getOptionA());
+        tvOptionB.setText(question.getOptionB());
+        tvOptionC.setText(question.getOptionC());
+        tvOptionD.setText(question.getOptionD());
 
         updateProgress();
         clearSelection();
+
+        // Restore previous answer if exists
+        String previousAnswer = userAnswers.get(currentQuestion - 1);
+        if (previousAnswer != null) {
+            selectAnswer(previousAnswer);
+        }
+
         updateNavigationButtons();
     }
 
@@ -116,6 +154,10 @@ public class ExamActivity extends AppCompatActivity {
 
     private void selectAnswer(String answer) {
         selectedAnswer = answer;
+
+        // Save user's answer
+        userAnswers.put(currentQuestion - 1, answer);
+
         clearSelection();
 
         switch (answer) {
@@ -219,11 +261,16 @@ public class ExamActivity extends AppCompatActivity {
         int seconds = (int) (timeTakenInMillis / 1000) % 60;
         String timeTaken = String.format("%02d:%02d", minutes, seconds);
 
-        // TODO: In a real implementation, calculate actual correct/wrong/skipped answers
-        // For now, use sample data based on random simulation
-        correctAnswersCount = (int) (totalQuestions * 0.75); // 75% correct as sample
-        wrongAnswersCount = totalQuestions - correctAnswersCount;
-        skippedQuestionsCount = 0;
+        // Calculate actual correct/wrong/skipped answers
+        calculateAnswers();
+
+        // Create answer review list
+        ArrayList<AnswerReview> answerReviews = new ArrayList<>();
+        for (int i = 0; i < questions.size(); i++) {
+            Question question = questions.get(i);
+            String userAnswer = userAnswers.get(i);
+            answerReviews.add(new AnswerReview(question, userAnswer));
+        }
 
         // Create intent and pass data
         Intent intent = new Intent(ExamActivity.this, ExamResultActivity.class);
@@ -232,9 +279,33 @@ public class ExamActivity extends AppCompatActivity {
         intent.putExtra("wrong_answers", wrongAnswersCount);
         intent.putExtra("skipped_questions", skippedQuestionsCount);
         intent.putExtra("time_taken", timeTaken);
+        intent.putExtra("answer_reviews", answerReviews);
 
         startActivity(intent);
         finish();
+    }
+
+    private void calculateAnswers() {
+        correctAnswersCount = 0;
+        wrongAnswersCount = 0;
+        skippedQuestionsCount = 0;
+
+        // Check each question
+        for (int i = 0; i < questions.size(); i++) {
+            Question question = questions.get(i);
+            String userAnswer = userAnswers.get(i);
+
+            if (userAnswer != null && !userAnswer.isEmpty()) {
+                if (question.isCorrectAnswer(userAnswer)) {
+                    correctAnswersCount++;
+                } else {
+                    wrongAnswersCount++;
+                }
+            } else {
+                // No answer selected counts as skipped
+                skippedQuestionsCount++;
+            }
+        }
     }
 
     @Override

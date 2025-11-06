@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Question Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:id="@+id/tv_question_number"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="1"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_primary_circle"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/tv_status_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đúng"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_success"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:layout_marginStart="12dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_expand"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_down"
+                android:contentDescription="Expand" />
+        </LinearLayout>
+
+        <!-- Question Text -->
+        <TextView
+            android:id="@+id/tv_question_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Biển báo này có ý nghĩa gì?"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Question Image (Optional) -->
+        <ImageView
+            android:id="@+id/iv_question_image"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerInside"
+            android:background="@drawable/bg_card_white"
+            android:padding="8dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            android:contentDescription="Question Image" />
+
+        <!-- Expandable Content -->
+        <LinearLayout
+            android:id="@+id/layout_expandable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- Answer Options -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp">
+
+                <!-- Option A -->
+                <LinearLayout
+                    android:id="@+id/layout_option_a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/answer_option_bg"
+                    android:padding="12dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:text="A"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bg_option_label"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/tv_option_a"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Cấm đi vào"
+                        android:textSize="14sp"
+                        android:textColor="#212121"
+                        android:layout_marginStart="12dp" />
+
+                    <ImageView
+                        android:id="@+id/iv_check_a"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        android:contentDescription="Check" />
+                </LinearLayout>
+
+                <!-- Option B -->
+                <LinearLayout
+                    android:id="@+id/layout_option_b"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/answer_option_bg"
+                    android:padding="12dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:text="B"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bg_option_label"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/tv_option_b"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Cấm dừng"
+                        android:textSize="14sp"
+                        android:textColor="#212121"
+                        android:layout_marginStart="12dp" />
+
+                    <ImageView
+                        android:id="@+id/iv_check_b"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        android:contentDescription="Check" />
+                </LinearLayout>
+
+                <!-- Option C -->
+                <LinearLayout
+                    android:id="@+id/layout_option_c"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/answer_option_bg"
+                    android:padding="12dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:text="C"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bg_option_label"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/tv_option_c"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Cấm quay đầu"
+                        android:textSize="14sp"
+                        android:textColor="#212121"
+                        android:layout_marginStart="12dp" />
+
+                    <ImageView
+                        android:id="@+id/iv_check_c"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        android:contentDescription="Check" />
+                </LinearLayout>
+
+                <!-- Option D -->
+                <LinearLayout
+                    android:id="@+id/layout_option_d"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/answer_option_bg"
+                    android:padding="12dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:text="D"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bg_option_label"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/tv_option_d"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Cấm rẽ phải"
+                        android:textSize="14sp"
+                        android:textColor="#212121"
+                        android:layout_marginStart="12dp" />
+
+                    <ImageView
+                        android:id="@+id/iv_check_d"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        android:contentDescription="Check" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Explanation -->
+            <LinearLayout
+                android:id="@+id/layout_explanation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_explanation"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Giải thích:"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#2196F3"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:id="@+id/tv_explanation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Biển báo cấm đi vào được sử dụng để cấm các phương tiện đi vào khu vực này."
+                    android:textSize="14sp"
+                    android:textColor="#424242" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+
