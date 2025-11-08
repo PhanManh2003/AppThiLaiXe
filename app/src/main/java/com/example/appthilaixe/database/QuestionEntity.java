@@ -25,10 +25,19 @@ public class QuestionEntity {
     private String optionC;
     private String optionD;
     private String correctAnswer;
+    private String imagePath;
     private String explanation;
 
-    public QuestionEntity(int categoryId, String questionText, String optionA, String optionB,
-                          String optionC, String optionD, String correctAnswer, String explanation) {
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public QuestionEntity(int id, int categoryId, String questionText, String optionA, String optionB, String optionC, String optionD, String correctAnswer, String imagePath, String explanation) {
+        this.id = id;
         this.categoryId = categoryId;
         this.questionText = questionText;
         this.optionA = optionA;
@@ -36,10 +45,10 @@ public class QuestionEntity {
         this.optionC = optionC;
         this.optionD = optionD;
         this.correctAnswer = correctAnswer;
+        this.imagePath = imagePath;
         this.explanation = explanation;
     }
 
-    // Getter Setter
     public int getId() {
         return id;
     }

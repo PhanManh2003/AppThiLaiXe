@@ -89,7 +89,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             tvProgressText.setText(category.getCompletedQuestions() + "/" + category.getTotalQuestions());
 
             // Set icon
-            ivCategoryIcon.setImageResource(category.getIconResId());
 
             // Set click listener
             btnStart.setOnClickListener(v -> {

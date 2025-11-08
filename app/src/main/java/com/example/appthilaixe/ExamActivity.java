@@ -269,7 +269,6 @@ public class ExamActivity extends AppCompatActivity {
         for (int i = 0; i < questions.size(); i++) {
             Question question = questions.get(i);
             String userAnswer = userAnswers.get(i);
-            answerReviews.add(new AnswerReview(question, userAnswer));
         }
 
         // Create intent and pass data

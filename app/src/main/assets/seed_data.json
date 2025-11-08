@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "username": "Admin",
+      "email": "admin@gmail.com",
+      "password": "123456"
+    }
+  ],
+  "categories": [
+    {
+      "name": "Biển báo",
+      "description": "Các câu hỏi về biển báo"
+    },
+    {
+      "name": "Sa hình",
+      "description": "Tình huống giao thông"
+    }
+  ],
+  "questions": [
+    {
+      "categoryId": 1,
+      "questionText": "Khi gặp biển báo này người lái xe phải làm gì?",
+      "optionA": "Giảm tốc độ và quan sát",
+      "optionB": "Tăng tốc độ",
+      "optionC": "Bấm còi và đi tiếp",
+      "optionD": "Quay đầu xe",
+      "correctAnswer": "A",
+      "imagePath": "",
+      "explanation": "Biển cảnh báo giao nhau với đường sắt có rào chắn."
+    }
+  ]
+}

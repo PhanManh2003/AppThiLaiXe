@@ -10,7 +10,7 @@ public class CategoryEntity {
     private String name;
     private String description;
 
-    public CategoryEntity(String name, String description, String icon) {
+    public CategoryEntity(String name, String description) {
         this.name = name;
         this.description = description;
     }

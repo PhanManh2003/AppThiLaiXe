@@ -34,59 +34,23 @@ public class AnswerReviewAdapter extends RecyclerView.Adapter<AnswerReviewAdapte
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         AnswerReview answer = answers.get(position);
-        Question question = answer.getQuestion();
 
-        // Set question number
-        holder.tvQuestionNumber.setText(String.valueOf(position + 1));
+        holder.tvQuestionText.setText((position + 1) + ". " + answer.getQuestionText());
 
-        // Set status badge
-        if (answer.isCorrect()) {
-            holder.tvStatusBadge.setText("Đúng");
-            holder.tvStatusBadge.setBackgroundResource(R.drawable.bg_success);
-        } else if (answer.isAnswered()) {
-            holder.tvStatusBadge.setText("Sai");
-            holder.tvStatusBadge.setBackgroundResource(R.drawable.bg_error);
-        } else {
-            holder.tvStatusBadge.setText("Bỏ qua");
-            holder.tvStatusBadge.setBackgroundResource(R.drawable.bg_warning);
-        }
+        holder.tvOptionA.setText("A. " + answer.getOptionA());
+        holder.tvOptionB.setText("B. " + answer.getOptionB());
+        holder.tvOptionC.setText("C. " + answer.getOptionC());
+        holder.tvOptionD.setText("D. " + answer.getOptionD());
 
-        // Set question text
-        holder.tvQuestionText.setText(question.getQuestionText());
 
-        // Show/hide question image
-        if (question.hasImage()) {
-            holder.ivQuestionImage.setImageResource(question.getImageResId());
-            holder.ivQuestionImage.setVisibility(View.VISIBLE);
-        } else {
-            holder.ivQuestionImage.setVisibility(View.GONE);
-        }
-
-        // Set options
-        holder.tvOptionA.setText(question.getOptionA());
-        holder.tvOptionB.setText(question.getOptionB());
-        holder.tvOptionC.setText(question.getOptionC());
-        holder.tvOptionD.setText(question.getOptionD());
-
-        // Highlight correct and user's answer
-        highlightAnswers(holder, answer);
-
-        // Set explanation
-        holder.tvExplanation.setText(question.getExplanation());
-
-        // Toggle expandable content
-        holder.itemView.setOnClickListener(v -> {
-            if (holder.layoutExpandable.getVisibility() == View.VISIBLE) {
-                holder.layoutExpandable.setVisibility(View.GONE);
-                holder.ivExpand.setRotation(0);
-            } else {
-                holder.layoutExpandable.setVisibility(View.VISIBLE);
-                holder.ivExpand.setRotation(180);
-            }
-        });
+        // Nếu có phần giải thích
+        holder.tvExplanation.setText(answer.getExplanation() != null
+                ? "Giải thích: " + answer.getExplanation()
+                : "");
     }
 
     private void highlightAnswers(ViewHolder holder, AnswerReview answer) {

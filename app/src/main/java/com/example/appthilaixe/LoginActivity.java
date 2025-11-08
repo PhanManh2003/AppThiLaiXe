@@ -3,17 +3,16 @@ package com.example.appthilaixe;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.example.appthilaixe.database.AppDatabase;
+import com.example.appthilaixe.database.User;
+import com.example.appthilaixe.database.UserDao;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivity extends AppCompatActivity {
@@ -22,16 +21,18 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private TextView tvForgotPassword, tvRegister, tvSkip;
 
+    private UserDao userDao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
-        
-        // Initialize views
+
         initViews();
-        
-        // Set click listeners
+
+        userDao = AppDatabase.getInstance(this).userDao();
+
         setClickListeners();
     }
 
@@ -46,23 +47,17 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setClickListeners() {
         btnLogin.setOnClickListener(v -> handleLogin());
-        
-        tvForgotPassword.setOnClickListener(v -> {
-            // TODO: Navigate to forgot password screen
-            Toast.makeText(LoginActivity.this, "Chức năng đang phát triển", Toast.LENGTH_SHORT).show();
-        });
-        
+
+        tvForgotPassword.setOnClickListener(v ->
+                Toast.makeText(this, "Chức năng đang phát triển", Toast.LENGTH_SHORT).show());
+
         tvRegister.setOnClickListener(v -> {
-            // Navigate to register screen
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, RegisterActivity.class));
             finish();
         });
-        
+
         tvSkip.setOnClickListener(v -> {
-            // Navigate to home screen
-            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, HomeActivity.class));
             finish();
         });
     }
@@ -71,32 +66,27 @@ public class LoginActivity extends AppCompatActivity {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
 
-        // Validate inputs
         if (TextUtils.isEmpty(email)) {
-            etEmail.setError("Vui lòng nhập email hoặc số điện thoại");
-            etEmail.requestFocus();
+            etEmail.setError("Vui lòng nhập email");
             return;
         }
-
         if (TextUtils.isEmpty(password)) {
             etPassword.setError("Vui lòng nhập mật khẩu");
-            etPassword.requestFocus();
             return;
         }
 
-        if (password.length() < 6) {
-            etPassword.setError("Mật khẩu phải có ít nhất 6 ký tự");
-            etPassword.requestFocus();
-            return;
-        }
+        // 🔹 Kiểm tra tài khoản trong database thật
+        User user = userDao.login(email, password);
 
-        // TODO: Implement actual login logic with backend
-        // For now, just navigate to home screen
-        Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-        
-        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-        startActivity(intent);
-        finish();
+        if (user != null) {
+            Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(this, HomeActivity.class);
+            intent.putExtra("userId", user.getUser_id());
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(this, "Sai email hoặc mật khẩu!", Toast.LENGTH_SHORT).show();
+        }
     }
 }
-

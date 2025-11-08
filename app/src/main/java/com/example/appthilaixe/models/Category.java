@@ -4,7 +4,6 @@ public class Category {
     private int id;
     private String name;
     private String description;
-    private int iconResId;
     private int totalQuestions;
     private int completedQuestions;
     private int colorResId;
@@ -14,7 +13,6 @@ public class Category {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.iconResId = iconResId;
         this.totalQuestions = totalQuestions;
         this.completedQuestions = completedQuestions;
         this.colorResId = colorResId;
@@ -33,9 +31,6 @@ public class Category {
         return description;
     }
 
-    public int getIconResId() {
-        return iconResId;
-    }
 
     public int getTotalQuestions() {
         return totalQuestions;
