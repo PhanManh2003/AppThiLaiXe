@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,9 +16,11 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.example.appthilaixe.adapters.CategoryAdapter;
+import com.example.appthilaixe.database.AppDatabase;
 import com.example.appthilaixe.models.Category;
+import com.example.appthilaixe.repositories.CategoryRepository;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +32,11 @@ public class LearningActivity extends AppCompatActivity implements CategoryAdapt
     private RecyclerView rvCategories;
     private LinearLayout emptyState;
     private CategoryAdapter adapter;
+
     private List<Category> allCategories;
     private List<Category> filteredCategories;
+
+    private int userId = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,16 +65,11 @@ public class LearningActivity extends AppCompatActivity implements CategoryAdapt
     }
 
     private void loadCategories() {
-        // TODO: Load from database
-        allCategories = new ArrayList<>();
 
-        // Sample data
-        allCategories.add(new Category(1, "Biển báo giao thông", "Học về các biển báo giao thông", R.drawable.ic_car, 100, 25, R.color.primary_blue));
-        allCategories.add(new Category(2, "Luật giao thông", "Các quy tắc giao thông cơ bản", R.drawable.ic_car, 80, 40, R.color.primary_green));
-        allCategories.add(new Category(3, "Kỹ năng lái xe", "Kỹ năng lái xe an toàn", R.drawable.ic_car, 120, 60, R.color.primary_orange));
-        allCategories.add(new Category(4, "Xử lý tình huống", "Xử lý các tình huống giao thông", R.drawable.ic_car, 90, 30, R.color.primary_blue));
-        allCategories.add(new Category(5, "Bảo dưỡng xe", "Kiến thức bảo dưỡng xe cơ bản", R.drawable.ic_car, 70, 50, R.color.primary_green));
+        CategoryRepository repo = new CategoryRepository(this);
+        allCategories = repo.loadWithProgress(userId);
 
+        filteredCategories.clear();
         filteredCategories.addAll(allCategories);
         adapter.notifyDataSetChanged();
         updateEmptyState();
@@ -100,10 +99,10 @@ public class LearningActivity extends AppCompatActivity implements CategoryAdapt
             filteredCategories.addAll(allCategories);
         } else {
             String lowerQuery = query.toLowerCase();
-            for (Category category : allCategories) {
-                if (category.getName().toLowerCase().contains(lowerQuery) ||
-                    category.getDescription().toLowerCase().contains(lowerQuery)) {
-                    filteredCategories.add(category);
+            for (Category c : allCategories) {
+                if (c.getName().toLowerCase().contains(lowerQuery) ||
+                        c.getDescription().toLowerCase().contains(lowerQuery)) {
+                    filteredCategories.add(c);
                 }
             }
         }
@@ -124,11 +123,9 @@ public class LearningActivity extends AppCompatActivity implements CategoryAdapt
 
     @Override
     public void onStartClick(Category category) {
-        // Navigate to CategoryQuestionsActivity with category information
-        Intent intent = new Intent(LearningActivity.this, CategoryQuestionsActivity.class);
+        Intent intent = new Intent(this, CategoryQuestionsActivity.class);
         intent.putExtra("category_id", category.getId());
         intent.putExtra("category_name", category.getName());
         startActivity(intent);
     }
 }
-

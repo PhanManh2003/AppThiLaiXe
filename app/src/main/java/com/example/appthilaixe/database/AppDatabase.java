@@ -22,9 +22,10 @@ import java.io.InputStreamReader;
                 CategoryEntity.class,
                 QuestionEntity.class,
                 ExamResultEntity.class,
-                UserAnswerEntity.class
+                UserAnswerEntity.class,
+                LearningProgressEntity.class
         },
-        version = 1,
+        version = 2,
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
@@ -34,6 +35,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract CategoryDao categoryDao();
     public abstract QuestionDao questionDao();
+    public abstract LearningProgressDao learningProgressDao();
 
     public static AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {
@@ -45,7 +47,8 @@ public abstract class AppDatabase extends RoomDatabase {
                                     "appthilaixe.db"
                             )
                             .allowMainThreadQueries()
-                            .addCallback(new SeedDatabaseCallback(context)) // 👈 Thêm dòng này
+                            .fallbackToDestructiveMigration()
+                            .addCallback(new SeedDatabaseCallback(context))
                             .build();
                 }
             }
@@ -120,7 +123,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     database.questionDao().insertQuestion(question);
                 }
 
-                System.out.println(" Seed database completed!");
+                System.out.println("Seed database completed!");
 
             } catch (Exception e) {
                 e.printStackTrace();

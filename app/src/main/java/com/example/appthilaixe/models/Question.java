@@ -12,11 +12,11 @@ public class Question implements Serializable {
     private String optionD;
     private String correctAnswer; // "A", "B", "C", or "D"
     private String explanation;
-    private int imageResId; // Optional image resource ID
+    private String imageResId; // Optional image resource ID
 
     public Question(int id, int categoryId, String questionText, String optionA, 
                    String optionB, String optionC, String optionD, 
-                   String correctAnswer, String explanation, int imageResId) {
+                   String correctAnswer, String explanation, String imageResId) {
         this.id = id;
         this.categoryId = categoryId;
         this.questionText = questionText;
@@ -34,7 +34,7 @@ public class Question implements Serializable {
                    String optionB, String optionC, String optionD, 
                    String correctAnswer, String explanation) {
         this(id, categoryId, questionText, optionA, optionB, optionC, optionD, 
-             correctAnswer, explanation, 0);
+             correctAnswer, explanation, null);
     }
 
     // Getters
@@ -74,12 +74,12 @@ public class Question implements Serializable {
         return explanation;
     }
 
-    public int getImageResId() {
+    public String getImageResId() {
         return imageResId;
     }
 
     public boolean hasImage() {
-        return imageResId != 0;
+        return imageResId != null;
     }
 
     // Check if a given answer is correct
