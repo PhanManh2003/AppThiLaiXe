@@ -13,8 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appthilaixe.adapters.CategoryAdapter;
-import com.example.appthilaixe.models.Category;
 import com.example.appthilaixe.repositories.CategoryRepository;
 import com.google.android.material.textfield.TextInputEditText;
 

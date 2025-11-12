@@ -12,9 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appthilaixe.adapters.AnswerReviewAdapter;
-import com.example.appthilaixe.models.AnswerReview;
-
 import java.util.ArrayList;
 import java.util.List;
 

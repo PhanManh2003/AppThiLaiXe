@@ -3,10 +3,10 @@ package com.example.appthilaixe.models;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "lessons")
-public class Lesson {
+@Entity(tableName = "tests")
+public class Test {
     @PrimaryKey(autoGenerate = true)
-    public int lessonId;
+    public int testId;
 
-    public String lessonName;
+    public String testName;
 }

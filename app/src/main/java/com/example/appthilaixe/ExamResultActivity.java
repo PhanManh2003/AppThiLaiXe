@@ -13,8 +13,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import com.example.appthilaixe.models.AnswerReview;
-
 import java.util.ArrayList;
 
 public class ExamResultActivity extends AppCompatActivity {

@@ -14,7 +14,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.appthilaixe.models.AnswerReview;
 import com.example.appthilaixe.models.Question;
 
 import java.util.ArrayList;

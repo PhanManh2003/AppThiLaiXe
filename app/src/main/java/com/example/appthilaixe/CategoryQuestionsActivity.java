@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appthilaixe.database.AppDatabase;
 import com.example.appthilaixe.models.Question;
-import com.example.appthilaixe.util.ProgressManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;

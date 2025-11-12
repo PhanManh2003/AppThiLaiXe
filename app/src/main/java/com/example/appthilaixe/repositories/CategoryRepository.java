@@ -3,11 +3,6 @@ package com.example.appthilaixe.repositories;
 import android.content.Context;
 
 import com.example.appthilaixe.database.AppDatabase;
-import com.example.appthilaixe.database.CategoryEntity;
-import com.example.appthilaixe.database.LearningProgressDao;
-import com.example.appthilaixe.database.LearningProgressEntity;
-import com.example.appthilaixe.database.QuestionDao;
-import com.example.appthilaixe.models.Category;
 
 import java.util.ArrayList;
 import java.util.List;

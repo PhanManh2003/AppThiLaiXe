@@ -1,27 +1,32 @@
 package com.example.appthilaixe.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "users")
 public class User {
+    @PrimaryKey(autoGenerate = true)
     public int userId;
+
     public String username;
     public String email;
     public String password;
 
-    public User() {}
-
-    public User(int userId, String username, String email, String password) {
-        this.userId = userId;
+    // Constructor, getters, setters, ...
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
     }
 
-    public String getPassword() {
-        return password;
+    // Các phương thức khác
+    // ...
+    public String getUsername() {
+        return username;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -32,12 +37,12 @@ public class User {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getUserId() {
@@ -47,4 +52,6 @@ public class User {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
 }
+

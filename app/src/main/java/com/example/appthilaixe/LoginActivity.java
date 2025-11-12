@@ -6,13 +6,13 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.appthilaixe.dao.UserDao;
+import com.example.appthilaixe.models.User;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appthilaixe.database.AppDatabase;
-import com.example.appthilaixe.database.User;
-import com.example.appthilaixe.database.UserDao;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivity extends AppCompatActivity {
@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(this, HomeActivity.class);
-            intent.putExtra("userId", user.getUser_id());
+            intent.putExtra("userId", user.getUserId());
             startActivity(intent);
             finish();
         } else {
