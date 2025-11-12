@@ -1,90 +1,104 @@
 package com.example.appthilaixe.models;
 
-import java.io.Serializable;
 
-public class Question implements Serializable {
-    private int id;
-    private int categoryId;
-    private String questionText;
-    private String optionA;
-    private String optionB;
-    private String optionC;
-    private String optionD;
-    private String correctAnswer; // "A", "B", "C", or "D"
-    private String explanation;
-    private String imageResId; // Optional image resource ID
+public class Question {
+    public int questionId;
+    public int lessonId;
+    public String optionA;
+    public String optionB;
+    public String optionC;
+    public String optionD;
+    public String correctAnswer;
+    public String explanation;
+    public String imagePath;
 
-    public Question(int id, int categoryId, String questionText, String optionA, 
-                   String optionB, String optionC, String optionD, 
-                   String correctAnswer, String explanation, String imageResId) {
-        this.id = id;
-        this.categoryId = categoryId;
-        this.questionText = questionText;
+    public Question() {
+    }
+
+    public Question(int questionId, int lessonId, String optionA, String optionB,
+                    String optionC, String optionD, String correctAnswer,
+                    String explanation, String imagePath) {
+        this.questionId = questionId;
+        this.lessonId = lessonId;
         this.optionA = optionA;
         this.optionB = optionB;
         this.optionC = optionC;
         this.optionD = optionD;
         this.correctAnswer = correctAnswer;
         this.explanation = explanation;
-        this.imageResId = imageResId;
+        this.imagePath = imagePath;
     }
 
-    // Constructor without image
-    public Question(int id, int categoryId, String questionText, String optionA, 
-                   String optionB, String optionC, String optionD, 
-                   String correctAnswer, String explanation) {
-        this(id, categoryId, questionText, optionA, optionB, optionC, optionD, 
-             correctAnswer, explanation, null);
+    public int getQuestionId() {
+        return questionId;
     }
 
-    // Getters
-    public int getId() {
-        return id;
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public int getLessonId() {
+        return lessonId;
     }
 
-    public String getQuestionText() {
-        return questionText;
+    public void setLessonId(int lessonId) {
+        this.lessonId = lessonId;
     }
 
     public String getOptionA() {
         return optionA;
     }
 
+    public void setOptionA(String optionA) {
+        this.optionA = optionA;
+    }
+
     public String getOptionB() {
         return optionB;
+    }
+
+    public void setOptionB(String optionB) {
+        this.optionB = optionB;
     }
 
     public String getOptionC() {
         return optionC;
     }
 
+    public void setOptionC(String optionC) {
+        this.optionC = optionC;
+    }
+
     public String getOptionD() {
         return optionD;
+    }
+
+    public void setOptionD(String optionD) {
+        this.optionD = optionD;
     }
 
     public String getCorrectAnswer() {
         return correctAnswer;
     }
 
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
     public String getExplanation() {
         return explanation;
     }
 
-    public String getImageResId() {
-        return imageResId;
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
     }
 
-    public boolean hasImage() {
-        return imageResId != null;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    // Check if a given answer is correct
-    public boolean isCorrectAnswer(String answer) {
-        return correctAnswer.equals(answer);
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }
 

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appthilaixe.R;
 import com.example.appthilaixe.models.AnswerReview;
-import com.example.appthilaixe.models.Question;
 
 import java.util.List;
 

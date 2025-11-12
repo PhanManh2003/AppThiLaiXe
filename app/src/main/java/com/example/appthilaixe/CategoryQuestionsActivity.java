@@ -14,7 +14,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appthilaixe.database.AppDatabase;
-import com.example.appthilaixe.models.AnswerReview;
 import com.example.appthilaixe.models.Question;
 import com.example.appthilaixe.util.ProgressManager;
 
