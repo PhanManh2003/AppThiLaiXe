@@ -41,5 +41,5 @@ public class UserTestResult {
         this.result = result;
     }
 
-    
+
 }

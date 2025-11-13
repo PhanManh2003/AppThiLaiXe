@@ -10,6 +10,7 @@
     {
       "questionId": 1,
       "lessonId": 1,
+      "questionTitle": "Các loại phương tiện giao thông?",
       "optionA": "Xe ô tô",
       "optionB": "Xe máy",
       "optionC": "Xe đạp",
@@ -21,6 +22,7 @@
     {
       "questionId": 2,
       "lessonId": 1,
+      "questionTitle": "Ai là người tham gia giao thông?",
       "optionA": "Người điều khiển phương tiện",
       "optionB": "Người tham gia giao thông",
       "optionC": "Cả hai đáp án trên",
@@ -32,6 +34,7 @@
     {
       "questionId": 3,
       "lessonId": 1,
+      "questionTitle": "Phần đường xe chạy là gì?",
       "optionA": "Phần đường xe chạy",
       "optionB": "Lề đường",
       "optionC": "Vỉa hè",
@@ -43,6 +46,7 @@
     {
       "questionId": 4,
       "lessonId": 1,
+      "questionTitle": "Hành vi tuân thủ luật giao thông?",
       "optionA": "Chạy đúng phần đường, làn đường",
       "optionB": "Không vượt tốc độ cho phép",
       "optionC": "Chấp hành hiệu lệnh giao thông",
@@ -54,50 +58,55 @@
     {
       "questionId": 5,
       "lessonId": 2,
+      "questionTitle": "Loại biển báo có viền đỏ hình tròn?",
       "optionA": "Biển báo nguy hiểm",
       "optionB": "Biển báo cấm",
       "optionC": "Biển hiệu lệnh",
       "optionD": "Biển chỉ dẫn",
       "correctAnswer": "B",
       "explanation": "Biển có viền đỏ hình tròn là biển báo cấm.",
-      "imagePath": "images/bien_cam.png"
+      "imagePath": ""
     },
     {
       "questionId": 6,
       "lessonId": 2,
+      "questionTitle": "Biển nền xanh biểu thị loại nào?",
       "optionA": "Biển báo chỉ dẫn",
       "optionB": "Biển báo nguy hiểm",
       "optionC": "Biển báo phụ",
       "optionD": "Biển báo cấm",
       "correctAnswer": "A",
       "explanation": "Biển nền xanh là biển chỉ dẫn.",
-      "imagePath": "images/bien_chi_dan.png"
+      "imagePath": ""
     },
     {
       "questionId": 7,
       "lessonId": 2,
+      "questionTitle": "Biển cấm người đi bộ?",
       "optionA": "Người đi bộ được phép qua đường",
       "optionB": "Cấm người đi bộ qua đường",
       "optionC": "Cảnh báo khu vực đông người qua lại",
       "optionD": "Chỉ dành cho xe máy",
       "correctAnswer": "B",
       "explanation": "Biển có hình người đi bộ gạch chéo là biển cấm người đi bộ.",
-      "imagePath": "images/cam_nguoi_di_bo.png"
+      "imagePath": ""
     },
     {
       "questionId": 8,
       "lessonId": 2,
+      "questionTitle": "Biển hình thoi màu vàng là gì?",
       "optionA": "Đường ưu tiên",
       "optionB": "Đường dành cho xe tải",
       "optionC": "Đường cấm ô tô",
       "optionD": "Đường giao nhau",
       "correctAnswer": "A",
       "explanation": "Biển hình thoi màu vàng là biển chỉ đường ưu tiên.",
-      "imagePath": "images/duong_uu_tien.png"
+      "imagePath": ""
     },
     {
       "questionId": 9,
       "lessonId": 1,
+      "questionTitle": "Xe phải đi bên nào theo chiều của mình?",
       "optionA": "Phải đi bên trái đường",
       "optionB": "Phải đi bên phải đường",
       "optionC": "Đi giữa đường",
@@ -109,6 +118,7 @@
     {
       "questionId": 10,
       "lessonId": 1,
+      "questionTitle": "Điều kiện đội mũ bảo hiểm khi điều khiển xe máy?",
       "optionA": "Đội mũ bảo hiểm đạt chuẩn",
       "optionB": "Không cần đội mũ bảo hiểm",
       "optionC": "Đội mũ bảo hiểm có kính chắn gió",

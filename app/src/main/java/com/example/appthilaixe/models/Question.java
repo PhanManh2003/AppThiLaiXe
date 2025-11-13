@@ -9,6 +9,8 @@ public class Question {
     public int questionId;
 
     public int lessonId;
+
+    public String questionTitle;
     public String optionA;
     public String optionB;
     public String optionC;
@@ -20,11 +22,12 @@ public class Question {
     public Question() {
     }
 
-    public Question(int questionId, int lessonId, String optionA, String optionB,
-                    String optionC, String optionD, String correctAnswer,
-                    String explanation, String imagePath) {
+    public Question(int questionId, int lessonId, String questionTitle,
+                    String optionA, String optionB, String optionC, String optionD,
+                    String correctAnswer, String explanation, String imagePath) {
         this.questionId = questionId;
         this.lessonId = lessonId;
+        this.questionTitle = questionTitle;
         this.optionA = optionA;
         this.optionB = optionB;
         this.optionC = optionC;
@@ -106,11 +109,20 @@ public class Question {
         this.imagePath = imagePath;
     }
 
+    public String getQuestionTitle() {
+        return questionTitle;
+    }
+
+    public void setQuestionTitle(String questionTitle) {
+        this.questionTitle = questionTitle;
+    }
+
     @Override
     public String toString() {
         return "Question{" +
                 "questionId=" + questionId +
                 ", lessonId=" + lessonId +
+                ", questionTitle='" + questionTitle + '\'' +
                 ", optionA='" + optionA + '\'' +
                 ", optionB='" + optionB + '\'' +
                 ", optionC='" + optionC + '\'' +
