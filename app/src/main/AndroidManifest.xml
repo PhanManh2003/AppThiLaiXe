@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,42 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppThiLaiXe"
         tools:targetApi="31">
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".HomeActivity"
             android:exported="true" />
+
         <activity
             android:name=".RegisterActivity"
             android:exported="true" />
-        <activity
-            android:name=".ExamActivity"
-            android:exported="true" />
-        <activity
-            android:name=".LearningActivity"
-            android:exported="true" />
-        <activity
-            android:name=".CategoryQuestionsActivity"
-            android:exported="false" />s
-        <activity
-            android:name=".ExamResultActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CategoryQuestionResultActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AnswerReviewActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
+
     </application>
 
 </manifest>

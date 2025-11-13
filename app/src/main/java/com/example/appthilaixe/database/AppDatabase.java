@@ -19,7 +19,7 @@ import com.example.appthilaixe.dao.*;
                 TestQuestionCrossRef.class,
                 UserTestResult.class
         },
-        version = 1,
+        version = 2,
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
@@ -39,7 +39,7 @@ public abstract class AppDatabase extends RoomDatabase {
                                     AppDatabase.class,
                                     "appthilaixe.db"
                             )
-                            .allowMainThreadQueries()
+
                             .fallbackToDestructiveMigration()
                             .build();
                 }

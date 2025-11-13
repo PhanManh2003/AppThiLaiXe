@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.btn_login);
         tvForgotPassword = findViewById(R.id.tv_forgot_password);
-        tvRegister = findViewById(R.id.tv_register);
+//        tvRegister = findViewById(R.id.tv_register);
         tvSkip = findViewById(R.id.tv_skip);
     }
 
@@ -51,10 +51,10 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPassword.setOnClickListener(v ->
                 Toast.makeText(this, "Chức năng đang phát triển", Toast.LENGTH_SHORT).show());
 
-        tvRegister.setOnClickListener(v -> {
-            startActivity(new Intent(this, RegisterActivity.class));
-            finish();
-        });
+//        tvRegister.setOnClickListener(v -> {
+//            startActivity(new Intent(this, RegisterActivity.class));
+//            finish();
+//        });
 
         tvSkip.setOnClickListener(v -> {
             startActivity(new Intent(this, HomeActivity.class));
@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    // File: LoginActivity.java
     private void handleLogin() {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
@@ -75,18 +76,22 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // 🔹 Kiểm tra tài khoản trong database thật
-        User user = userDao.login(email, password);
+        // 🔹 BẮT BUỘC: Chạy kiểm tra database trên một luồng nền
+        new Thread(() -> {
+            // Tác vụ này chạy ở luồng nền
+            User user = userDao.login(email, password);
 
-        if (user != null) {
-            Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+            runOnUiThread(() -> {
+                if (user != null) {
+                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(this, HomeActivity.class);
-            intent.putExtra("userId", user.getUserId());
-            startActivity(intent);
-            finish();
-        } else {
-            Toast.makeText(this, "Sai email hoặc mật khẩu!", Toast.LENGTH_SHORT).show();
-        }
-    }
-}
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    intent.putExtra("userId", user.getUserId());
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Sai email hoặc mật khẩu!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }).start();
+    }}

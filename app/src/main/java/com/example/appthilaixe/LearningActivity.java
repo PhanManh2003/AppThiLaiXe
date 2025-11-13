@@ -7,30 +7,31 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.appthilaixe.repositories.CategoryRepository;
+import com.example.appthilaixe.dao.LessonDao;
+import com.example.appthilaixe.database.AppDatabase;
+import com.example.appthilaixe.models.Lesson;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LearningActivity extends AppCompatActivity implements CategoryAdapter.OnCategoryClickListener {
+public class LearningActivity extends AppCompatActivity implements LessonAdapter.OnLessonClickListener {
 
     private ImageView btnBack;
     private TextInputEditText etSearch;
-    private RecyclerView rvCategories;
+    private RecyclerView rvLessons;
     private LinearLayout emptyState;
-    private CategoryAdapter adapter;
+    private LessonAdapter adapter;
 
-    private List<Category> allCategories;
-    private List<Category> filteredCategories;
+    private List<Lesson> allLessons = new ArrayList<>();
+    private List<Lesson> filteredLessons = new ArrayList<>();
 
-    private int userId = 1;
+    private int userId = 1; // nếu có userId thì nhận từ intent
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,32 +41,34 @@ public class LearningActivity extends AppCompatActivity implements CategoryAdapt
 
         initViews();
         setupRecyclerView();
-        loadCategories();
+        loadLessons();
         setClickListeners();
     }
 
     private void initViews() {
         btnBack = findViewById(R.id.btn_back);
         etSearch = findViewById(R.id.et_search);
-        rvCategories = findViewById(R.id.rv_categories);
+        rvLessons = findViewById(R.id.rv_categories);
         emptyState = findViewById(R.id.empty_state);
+
+        // nhận userId từ HomeActivity nếu cần
+        userId = getIntent().getIntExtra("userId", 1);
     }
 
     private void setupRecyclerView() {
-        rvCategories.setLayoutManager(new LinearLayoutManager(this));
-        filteredCategories = new ArrayList<>();
-        adapter = new CategoryAdapter(filteredCategories, this);
-        rvCategories.setAdapter(adapter);
+        rvLessons.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new LessonAdapter(filteredLessons, this);
+        rvLessons.setAdapter(adapter);
     }
 
-    private void loadCategories() {
+    private void loadLessons() {
+        LessonDao dao = AppDatabase.getInstance(this).lessonDao();
+        allLessons = dao.getAll();   // 👉 LẤY DỮ LIỆU TRỰC TIẾP TỪ DB
 
-        CategoryRepository repo = new CategoryRepository(this);
-        allCategories = repo.loadWithProgress(userId);
-
-        filteredCategories.clear();
-        filteredCategories.addAll(allCategories);
+        filteredLessons.clear();
+        filteredLessons.addAll(allLessons);
         adapter.notifyDataSetChanged();
+
         updateEmptyState();
     }
 
@@ -73,30 +76,24 @@ public class LearningActivity extends AppCompatActivity implements CategoryAdapt
         btnBack.setOnClickListener(v -> finish());
 
         etSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                filterCategories(s.toString());
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterLessons(s.toString());
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {}
+            @Override public void afterTextChanged(Editable s) {}
         });
     }
 
-    private void filterCategories(String query) {
-        filteredCategories.clear();
+    private void filterLessons(String query) {
+        filteredLessons.clear();
 
         if (query.isEmpty()) {
-            filteredCategories.addAll(allCategories);
+            filteredLessons.addAll(allLessons);
         } else {
-            String lowerQuery = query.toLowerCase();
-            for (Category c : allCategories) {
-                if (c.getName().toLowerCase().contains(lowerQuery) ||
-                        c.getDescription().toLowerCase().contains(lowerQuery)) {
-                    filteredCategories.add(c);
+            String q = query.toLowerCase();
+            for (Lesson l : allLessons) {
+                if (l.lessonName.toLowerCase().contains(q)) {
+                    filteredLessons.add(l);
                 }
             }
         }
@@ -106,20 +103,20 @@ public class LearningActivity extends AppCompatActivity implements CategoryAdapt
     }
 
     private void updateEmptyState() {
-        if (filteredCategories.isEmpty()) {
-            rvCategories.setVisibility(View.GONE);
+        if (filteredLessons.isEmpty()) {
+            rvLessons.setVisibility(View.GONE);
             emptyState.setVisibility(View.VISIBLE);
         } else {
-            rvCategories.setVisibility(View.VISIBLE);
+            rvLessons.setVisibility(View.VISIBLE);
             emptyState.setVisibility(View.GONE);
         }
     }
 
     @Override
-    public void onStartClick(Category category) {
+    public void onStartClick(Lesson lesson) {
         Intent intent = new Intent(this, CategoryQuestionsActivity.class);
-        intent.putExtra("category_id", category.getId());
-        intent.putExtra("category_name", category.getName());
+        intent.putExtra("lessonId", lesson.lessonId);
+        intent.putExtra("lessonName", lesson.lessonName);
         startActivity(intent);
     }
 }

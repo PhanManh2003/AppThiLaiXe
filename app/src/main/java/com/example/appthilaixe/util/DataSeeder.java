@@ -18,42 +18,45 @@ public class DataSeeder {
         @SerializedName("questions") public List<Question> questions;
     }
 
+    // File: DataSeeder.java
     public static void seedAll(Context context, AppDatabase db) {
-        try {
-            String json = JsonUtils.loadJSON(context, "seed_data.json");
-            if (json == null || json.isEmpty()) {
-                System.out.println(" Không tìm thấy file seed_data.json trong assets/");
-                return;
-            }
+        // 🔹 BẮT BUỘC: Chạy toàn bộ logic seed trên luồng nền
+        new Thread(() -> {
+            try {
+                String json = JsonUtils.loadJSON(context, "seed_data.json");
+                if (json == null || json.isEmpty()) {
+                    System.out.println(" Không tìm thấy file seed_data.json trong assets/");
+                    return;
+                }
 
-            SeedData data = new Gson().fromJson(json, SeedData.class);
-            if (data == null) {
-                System.out.println("⚠Không thể parse JSON thành đối tượng SeedData");
-                return;
-            }
+                SeedData data = new Gson().fromJson(json, SeedData.class);
+                if (data == null) {
+                    System.out.println("⚠Không thể parse JSON thành đối tượng SeedData");
+                    return;
+                }
 
-            // ---- USERS ----
-            if (data.users != null && db.userDao().getAllUsers().isEmpty()) {
-                db.userDao().insertAll(data.users);
-                System.out.println(" Đã seed " + data.users.size() + " users");
-            }
+                // ---- USERS ----
+                if (data.users != null && db.userDao().getAllUsers().isEmpty()) {
+                    db.userDao().insertAll(data.users);
+                    System.out.println(" Đã seed " + data.users.size() + " users");
+                }
 
-            // ---- LESSONS ----
-            if (data.lessons != null && db.lessonDao().getAll().isEmpty()) {
-                db.lessonDao().insertAll(data.lessons);
-                System.out.println(" Đã seed " + data.lessons.size() + " lessons");
-            }
+                // ---- LESSONS ----
+                if (data.lessons != null && db.lessonDao().getAll().isEmpty()) {
+                    db.lessonDao().insertAll(data.lessons);
+                    System.out.println(" Đã seed " + data.lessons.size() + " lessons");
+                }
 
-            // ---- QUESTIONS ----
-            if (data.questions != null && db.questionDao().getAll().isEmpty()) {
-                db.questionDao().insertAll(data.questions);
-                System.out.println(" Đã seed " + data.questions.size() + " questions");
-            }
+                // ---- QUESTIONS ----
+                if (data.questions != null && db.questionDao().getAll().isEmpty()) {
+                    db.questionDao().insertAll(data.questions);
+                    System.out.println(" Đã seed " + data.questions.size() + " questions");
+                }
 
-            System.out.println(" Seed dữ liệu hoàn tất!");
-        } catch (Exception e) {
-            System.err.println("⚠ Lỗi khi seed database: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-}
+                System.out.println(" Seed dữ liệu hoàn tất!");
+            } catch (Exception e) {
+                System.err.println("⚠ Lỗi khi seed database: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }).start(); // <--- .start() để chạy luồng
+    }}

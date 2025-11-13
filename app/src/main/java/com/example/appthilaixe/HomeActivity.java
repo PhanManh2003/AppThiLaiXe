@@ -23,22 +23,24 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Initialize buttons
-        Button btnStartExam = findViewById(R.id.btn_start_exam);
+//        Button btnStartExam = findViewById(R.id.btn_start_exam);
+//
+//        // Set click listeners
+//        btnStartExam.setOnClickListener(v -> {
+//            // Navigate to exam activity
+//            Intent intent = new Intent(HomeActivity.this, ExamActivity.class);
+//            startActivity(intent);
+//        });
+//
+        int userId = getIntent().getIntExtra("userId", -1);
+
         Button btnLearnNow = findViewById(R.id.btn_learn_now);
 
-        // Set click listeners
-        btnStartExam.setOnClickListener(v -> {
-            // Navigate to exam activity
-            Intent intent = new Intent(HomeActivity.this, ExamActivity.class);
-            startActivity(intent);
-        });
-
         btnLearnNow.setOnClickListener(v -> {
-            // Navigate to learning activity
             Intent intent = new Intent(HomeActivity.this, LearningActivity.class);
+            intent.putExtra("userId", userId);
             startActivity(intent);
         });
-    }
+   }
 }
 
