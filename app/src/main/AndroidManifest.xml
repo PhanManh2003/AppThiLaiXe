@@ -34,6 +34,12 @@
         <activity
             android:name=".RegisterActivity"
             android:exported="true" />
+        <activity
+            android:name=".CategoryQuestionsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CategoryQuestionResultActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

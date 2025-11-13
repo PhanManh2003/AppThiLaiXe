@@ -106,13 +106,15 @@
 
             <!-- Question Number -->
             <TextView
+                android:id="@+id/tv_question_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/question_number"
-                android:textSize="12sp"
-                android:textColor="@color/primary_blue"
+                android:text="Câu 1"
                 android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+                android:textSize="14sp"
+                android:textColor="@color/primary_blue"
+                android:layout_marginBottom="6dp"/>
+
 
             <!-- Question Text -->
             <TextView
@@ -329,7 +331,36 @@
                 </LinearLayout>
 
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_explanation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@drawable/bg_card_white"
+                android:elevation="4dp"
+                android:visibility="gone"
+                android:layout_marginTop="10dp">
 
+                <TextView
+                    android:id="@+id/tv_correct_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đáp án đúng: A"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_blue"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/tv_explanation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Giải thích chi tiết..."
+                    android:textSize="15sp"
+                    android:textColor="@color/text_dark"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingMultiplier="1.2"/>
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>

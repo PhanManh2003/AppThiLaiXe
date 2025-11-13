@@ -155,9 +155,9 @@ public class LearningActivity extends AppCompatActivity implements LessonAdapter
 
     @Override
     public void onStartClick(Lesson lesson) {
-//        Intent intent = new Intent(this, CategoryQuestionsActivity.class);
-//        intent.putExtra("lessonId", lesson.lessonId);
-//        intent.putExtra("lessonName", lesson.lessonName);
-//        startActivity(intent);
+        Intent intent = new Intent(this, CategoryQuestionsActivity.class);
+        intent.putExtra("lessonId", lesson.lessonId);
+        intent.putExtra("lessonName", lesson.lessonName);
+        startActivity(intent);
     }
 }

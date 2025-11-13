@@ -23,8 +23,6 @@ public class User {
 
     }
 
-    // Các phương thức khác
-    // ...
     public String getUsername() {
         return username;
     }

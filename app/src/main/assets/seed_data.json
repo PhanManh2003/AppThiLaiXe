@@ -4,7 +4,8 @@
   ],
   "lessons": [
     { "lessonId": 1, "lessonName": "Khái niệm cơ bản" },
-    { "lessonId": 2, "lessonName": "Biển báo giao thông" }
+    { "lessonId": 2, "lessonName": "Biển báo giao thông" },
+    { "lessonId": 3, "lessonName": "Quy tắc giao thông" }
   ],
   "questions": [
     {

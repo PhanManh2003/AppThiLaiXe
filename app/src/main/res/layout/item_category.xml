@@ -57,7 +57,6 @@
                 android:id="@+id/tv_category_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Học về các biển báo giao thông"
                 android:textSize="12sp"
                 android:textColor="@color/text_gray"
                 android:maxLines="1"

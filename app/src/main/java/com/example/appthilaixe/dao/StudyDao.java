@@ -2,6 +2,7 @@ package com.example.appthilaixe.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -21,6 +22,8 @@ public interface StudyDao {
     @Insert
     void insert(Study study);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertOrUpdate(Study study);
     @Update
     void update(Study study);
 
