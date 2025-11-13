@@ -13,10 +13,127 @@
       "optionA": "Xe ô tô",
       "optionB": "Xe máy",
       "optionC": "Xe đạp",
-      "optionD": "Tất cả đúng",
+      "optionD": "Tất cả đều đúng",
       "correctAnswer": "D",
-      "explanation": "Tất cả là phương tiện giao thông",
+      "explanation": "Tất cả là phương tiện giao thông cơ giới hoặc thô sơ.",
+      "imagePath": ""
+    },
+    {
+      "questionId": 2,
+      "lessonId": 1,
+      "optionA": "Người điều khiển phương tiện",
+      "optionB": "Người tham gia giao thông",
+      "optionC": "Cả hai đáp án trên",
+      "optionD": "Không đáp án nào đúng",
+      "correctAnswer": "C",
+      "explanation": "Cả người điều khiển và người đi bộ đều là người tham gia giao thông.",
+      "imagePath": ""
+    },
+    {
+      "questionId": 3,
+      "lessonId": 1,
+      "optionA": "Phần đường xe chạy",
+      "optionB": "Lề đường",
+      "optionC": "Vỉa hè",
+      "optionD": "Phần đất dành cho người đi bộ",
+      "correctAnswer": "A",
+      "explanation": "Phần đường xe chạy là phần mặt đường dành cho các phương tiện di chuyển.",
+      "imagePath": ""
+    },
+    {
+      "questionId": 4,
+      "lessonId": 1,
+      "optionA": "Chạy đúng phần đường, làn đường",
+      "optionB": "Không vượt tốc độ cho phép",
+      "optionC": "Chấp hành hiệu lệnh giao thông",
+      "optionD": "Tất cả các đáp án trên",
+      "correctAnswer": "D",
+      "explanation": "Tất cả các hành vi trên là tuân thủ luật giao thông.",
+      "imagePath": ""
+    },
+    {
+      "questionId": 5,
+      "lessonId": 2,
+      "optionA": "Biển báo nguy hiểm",
+      "optionB": "Biển báo cấm",
+      "optionC": "Biển hiệu lệnh",
+      "optionD": "Biển chỉ dẫn",
+      "correctAnswer": "B",
+      "explanation": "Biển có viền đỏ hình tròn là biển báo cấm.",
+      "imagePath": "images/bien_cam.png"
+    },
+    {
+      "questionId": 6,
+      "lessonId": 2,
+      "optionA": "Biển báo chỉ dẫn",
+      "optionB": "Biển báo nguy hiểm",
+      "optionC": "Biển báo phụ",
+      "optionD": "Biển báo cấm",
+      "correctAnswer": "A",
+      "explanation": "Biển nền xanh là biển chỉ dẫn.",
+      "imagePath": "images/bien_chi_dan.png"
+    },
+    {
+      "questionId": 7,
+      "lessonId": 2,
+      "optionA": "Người đi bộ được phép qua đường",
+      "optionB": "Cấm người đi bộ qua đường",
+      "optionC": "Cảnh báo khu vực đông người qua lại",
+      "optionD": "Chỉ dành cho xe máy",
+      "correctAnswer": "B",
+      "explanation": "Biển có hình người đi bộ gạch chéo là biển cấm người đi bộ.",
+      "imagePath": "images/cam_nguoi_di_bo.png"
+    },
+    {
+      "questionId": 8,
+      "lessonId": 2,
+      "optionA": "Đường ưu tiên",
+      "optionB": "Đường dành cho xe tải",
+      "optionC": "Đường cấm ô tô",
+      "optionD": "Đường giao nhau",
+      "correctAnswer": "A",
+      "explanation": "Biển hình thoi màu vàng là biển chỉ đường ưu tiên.",
+      "imagePath": "images/duong_uu_tien.png"
+    },
+    {
+      "questionId": 9,
+      "lessonId": 1,
+      "optionA": "Phải đi bên trái đường",
+      "optionB": "Phải đi bên phải đường",
+      "optionC": "Đi giữa đường",
+      "optionD": "Tùy ý",
+      "correctAnswer": "B",
+      "explanation": "Luật quy định phương tiện phải đi bên phải theo chiều đi của mình.",
+      "imagePath": ""
+    },
+    {
+      "questionId": 10,
+      "lessonId": 1,
+      "optionA": "Đội mũ bảo hiểm đạt chuẩn",
+      "optionB": "Không cần đội mũ bảo hiểm",
+      "optionC": "Đội mũ bảo hiểm có kính chắn gió",
+      "optionD": "Tất cả sai",
+      "correctAnswer": "A",
+      "explanation": "Khi điều khiển xe máy, phải đội mũ bảo hiểm đạt chuẩn để bảo vệ an toàn.",
       "imagePath": ""
     }
+  ],
+  "tests": [
+    {
+      "testId": 1,
+      "testName": "Đề thi thử số 1"
+    }
+  ],
+  "test_question": [
+    { "testId": 1, "questionId": 1 },
+    { "testId": 1, "questionId": 2 },
+    { "testId": 1, "questionId": 3 },
+    { "testId": 1, "questionId": 4 },
+    { "testId": 1, "questionId": 5 },
+    { "testId": 1, "questionId": 6 },
+    { "testId": 1, "questionId": 7 },
+    { "testId": 1, "questionId": 8 },
+    { "testId": 1, "questionId": 9 },
+    { "testId": 1, "questionId": 10 }
   ]
 }
