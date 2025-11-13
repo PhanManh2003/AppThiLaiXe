@@ -10,15 +10,14 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 public class RegisterActivity extends AppCompatActivity {
-
-    private TextInputEditText etFullName, etEmail, etPhone, etPassword, etConfirmPassword;
+    // ------------------------------
+    // Khai báo các view
+    // ------------------------------
+    private TextInputEditText etFullName, etEmail, etPassword, etConfirmPassword;
     private Button btnRegister;
     private CheckBox cbTerms;
     private TextView tvTerms, tvLogin;
@@ -39,7 +38,6 @@ public class RegisterActivity extends AppCompatActivity {
     private void initViews() {
         etFullName = findViewById(R.id.et_full_name);
         etEmail = findViewById(R.id.et_email);
-        etPhone = findViewById(R.id.et_phone);
         etPassword = findViewById(R.id.et_password);
         etConfirmPassword = findViewById(R.id.et_confirm_password);
         btnRegister = findViewById(R.id.btn_register);
@@ -67,7 +65,6 @@ public class RegisterActivity extends AppCompatActivity {
     private void handleRegister() {
         String fullName = etFullName.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
-        String phone = etPhone.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
         String confirmPassword = etConfirmPassword.getText().toString().trim();
 
@@ -87,18 +84,6 @@ public class RegisterActivity extends AppCompatActivity {
         if (!isValidEmail(email)) {
             etEmail.setError("Email không hợp lệ");
             etEmail.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(phone)) {
-            etPhone.setError("Vui lòng nhập số điện thoại");
-            etPhone.requestFocus();
-            return;
-        }
-
-        if (!isValidPhone(phone)) {
-            etPhone.setError("Số điện thoại không hợp lệ");
-            etPhone.requestFocus();
             return;
         }
 
@@ -133,19 +118,18 @@ public class RegisterActivity extends AppCompatActivity {
 
         // TODO: Implement actual registration logic with backend
         Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-        
-        // Navigate to login screen
+
+        // Sau khi đăng ký, quay về màn hình Login
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
 
+    // ------------------------------
+    // Kiểm tra email hợp lệ
+    // ------------------------------
     private boolean isValidEmail(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
-    private boolean isValidPhone(String phone) {
-        return phone.length() >= 10 && phone.length() <= 11 && phone.matches("[0-9]+");
     }
 }
 

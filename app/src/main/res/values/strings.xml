@@ -33,7 +33,7 @@
     <!-- Login Screen -->
     <string name="login_title">Đăng Nhập</string>
     <string name="login_subtitle">Chào mừng bạn trở lại!</string>
-    <string name="email_hint">Email hoặc Số điện thoại</string>
+    <string name="email_hint">Email</string>
     <string name="password_hint">Mật khẩu</string>
     <string name="login_button">Đăng Nhập</string>
     <string name="forgot_password">Quên mật khẩu?</string>
@@ -47,7 +47,7 @@
     <!-- Register Screen -->
     <string name="register_title">Đăng Ký</string>
     <string name="register_subtitle">Tạo tài khoản để bắt đầu học</string>
-    <string name="full_name_hint">Họ và Tên</string>
+    <string name="full_name_hint">Fullname</string>
     <string name="phone_hint">Số Điện Thoại</string>
     <string name="confirm_password_hint">Xác Nhận Mật Khẩu</string>
     <string name="register_button">Đăng Ký</string>
