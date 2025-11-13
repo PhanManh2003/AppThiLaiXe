@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.btn_login);
         tvForgotPassword = findViewById(R.id.tv_forgot_password);
-//        tvRegister = findViewById(R.id.tv_register);
+        tvRegister = findViewById(R.id.tv_register);
         tvSkip = findViewById(R.id.tv_skip);
     }
 
@@ -51,10 +51,10 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPassword.setOnClickListener(v ->
                 Toast.makeText(this, "Chức năng đang phát triển", Toast.LENGTH_SHORT).show());
 
-//        tvRegister.setOnClickListener(v -> {
-//            startActivity(new Intent(this, RegisterActivity.class));
-//            finish();
-//        });
+        tvRegister.setOnClickListener(v -> {
+            startActivity(new Intent(this, RegisterActivity.class));
+            finish();
+        });
 
         tvSkip.setOnClickListener(v -> {
             startActivity(new Intent(this, HomeActivity.class));
