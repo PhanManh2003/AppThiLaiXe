@@ -35,8 +35,6 @@ public class HomeActivity extends AppCompatActivity {
         int userId = getIntent().getIntExtra("userId", -1);
 
         Button btnLearnNow = findViewById(R.id.btn_learn_now);
-
-
    }
 }
 

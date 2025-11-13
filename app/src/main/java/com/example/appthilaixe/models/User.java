@@ -19,6 +19,10 @@ public class User {
         this.password = password;
     }
 
+    public User() {
+
+    }
+
     // Các phương thức khác
     // ...
     public String getUsername() {

@@ -11,7 +11,12 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appthilaixe.dao.UserDao;
+import com.example.appthilaixe.database.AppDatabase;
+import com.example.appthilaixe.models.User;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.concurrent.Executors;
 
 public class RegisterActivity extends AppCompatActivity {
     // ------------------------------
@@ -22,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
     private CheckBox cbTerms;
     private TextView tvTerms, tvLogin;
 
+    private UserDao userDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +36,9 @@ public class RegisterActivity extends AppCompatActivity {
         
         // Initialize views
         initViews();
-        
+        // get db
+        userDao = AppDatabase.getInstance(this).userDao();
+
         // Set click listeners
         setClickListeners();
     }
@@ -117,12 +125,30 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // TODO: Implement actual registration logic with backend
-        Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+        Executors.newSingleThreadExecutor().execute(() -> {
+            User existingUser = userDao.getUserByEmail(email);
+            runOnUiThread(() -> {
+                if (existingUser != null) {
+                    Toast.makeText(this, "Email đã tồn tại", Toast.LENGTH_SHORT).show();
+                } else {
+                    Executors.newSingleThreadExecutor().execute(() -> {
+                        User user = new User();
+                        user.username = fullName;
+                        user.password = password;
+                        user.email = email;
 
-        // Sau khi đăng ký, quay về màn hình Login
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+                        userDao.insertUser(user);
+
+                        runOnUiThread(() -> {
+                            Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        });
+                    });
+                }
+            });
+        });
     }
 
     // ------------------------------
