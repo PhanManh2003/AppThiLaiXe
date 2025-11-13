@@ -6,4 +6,8 @@ import androidx.room.Entity;
 public class TestQuestionCrossRef {
     public int testId;
     public int questionId;
+
+    public TestQuestionCrossRef() {
+    }
+
 }
