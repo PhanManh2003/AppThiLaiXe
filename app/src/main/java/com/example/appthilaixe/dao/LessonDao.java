@@ -14,4 +14,7 @@ public interface LessonDao {
 
     @Query("SELECT * FROM lessons")
     List<Lesson> getAll();
+
+    @Query("DELETE FROM lessons")
+    void deleteAll();
 }

@@ -136,13 +136,14 @@
 
             <!-- Question Number -->
             <TextView
+                android:id="@+id/question_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="@string/question_number"
-                android:textSize="12sp"
                 android:textColor="@color/primary_blue"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <!-- Question Text -->
             <TextView
@@ -340,10 +341,10 @@
                         android:id="@+id/iv_check_d"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_check_circle"
                         android:contentDescription="@string/selected"
-                        android:visibility="gone"
-                        android:tint="@color/primary_green" />
+                        android:src="@drawable/ic_check_circle"
+                        android:tint="@color/primary_green"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 

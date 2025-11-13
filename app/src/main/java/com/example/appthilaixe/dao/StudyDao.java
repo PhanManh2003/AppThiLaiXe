@@ -27,4 +27,7 @@ public interface StudyDao {
     // cập nhật tiến độ học
     @Query("UPDATE study SET learnedCount = :count WHERE userId = :userId AND lessonId = :lessonId")
     void updateLearned(int userId, int lessonId, int count);
+
+    @Query("DELETE FROM study")
+    void deleteAll();
 }

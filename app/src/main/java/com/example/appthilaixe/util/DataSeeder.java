@@ -72,7 +72,7 @@ public class DataSeeder {
                 }
                 System.out.println(" Seed dữ liệu hoàn tất!");
             } catch (Exception e) {
-                System.err.println("⚠ Lỗi khi seed database: " + e.getMessage());
+                System.err.println(" Lỗi khi seed database: " + e.getMessage());
                 e.printStackTrace();
             }
         }).start(); // <--- .start() để chạy luồng

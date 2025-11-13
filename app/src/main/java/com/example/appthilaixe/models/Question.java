@@ -117,6 +117,12 @@ public class Question {
         this.questionTitle = questionTitle;
     }
 
+    // check correct answer for user answer
+    public boolean isCorrectAnswer(String userAnswer) {
+        if (userAnswer == null) return false;
+        return userAnswer.trim().equalsIgnoreCase(correctAnswer);
+    }
+
     @Override
     public String toString() {
         return "Question{" +
