@@ -19,9 +19,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.concurrent.Executors;
 
 public class RegisterActivity extends AppCompatActivity {
-    // ------------------------------
-    // Khai báo các view
-    // ------------------------------
+
     private TextInputEditText etFullName, etEmail, etPassword, etConfirmPassword;
     private Button btnRegister;
     private CheckBox cbTerms;

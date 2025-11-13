@@ -36,6 +36,11 @@ public class HomeActivity extends AppCompatActivity {
 
         Button btnLearnNow = findViewById(R.id.btn_learn_now);
 
+        btnLearnNow.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, LearningActivity.class);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
+        });
 
     }
 }
