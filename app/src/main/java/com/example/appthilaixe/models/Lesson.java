@@ -7,6 +7,5 @@ import androidx.room.PrimaryKey;
 public class Lesson {
     @PrimaryKey(autoGenerate = true)
     public int lessonId;
-
     public String lessonName;
 }
