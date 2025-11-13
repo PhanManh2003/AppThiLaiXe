@@ -12,10 +12,10 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
-        // 🧹 Bước 1: Reset dữ liệu cũ (xoá tất cả trừ users)
+        // Bước 1: Reset dữ liệu cũ (xoá tất cả trừ users)
         DatabaseCleaner.clearAllExceptUsers(getApplicationContext());
 
-        // 🌱 Bước 2: Seed dữ liệu mới
+        // Bước 2: Seed dữ liệu mới
         DataSeeder.seedAll(getApplicationContext(), db);
     }
 }
