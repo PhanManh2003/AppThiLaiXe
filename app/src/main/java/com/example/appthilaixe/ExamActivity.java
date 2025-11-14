@@ -15,6 +15,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appthilaixe.database.AppDatabase;
+import com.example.appthilaixe.models.AnswerReview;
 import com.example.appthilaixe.models.Question;
 
 import java.util.ArrayList;
@@ -283,6 +284,27 @@ public class ExamActivity extends AppCompatActivity {
     private void navigateToResult() {
         calculateAnswers();
 
+        // Tạo list AnswerReview
+        ArrayList<AnswerReview> answerReviews = new ArrayList<>();
+        for (int i = 0; i < questions.size(); i++) {
+            Question q = questions.get(i);
+            String userAnswer = userAnswers.get(i);
+
+            AnswerReview review = new AnswerReview(
+                    q.getQuestionId(),
+                    q.getQuestionTitle(),
+                    q.getOptionA(),
+                    q.getOptionB(),
+                    q.getOptionC(),
+                    q.getOptionD(),
+                    q.getCorrectAnswer(),
+                    q.getExplanation(),
+                    q.getImagePath(),
+                    userAnswer
+            );
+            answerReviews.add(review);
+        }
+
         long timeTakenMillis = initialTimeInMillis - timeLeftInMillis;
         int minutes = (int) (timeTakenMillis / 1000) / 60;
         int seconds = (int) (timeTakenMillis / 1000) % 60;
@@ -295,9 +317,17 @@ public class ExamActivity extends AppCompatActivity {
         intent.putExtra("skipped_questions", skippedQuestionsCount);
         intent.putExtra("time_taken", timeTaken);
 
+        // Truyền list AnswerReview
+        intent.putExtra("answer_reviews", answerReviews);
+
+        // Truyền testId để ExamResultActivity có thể "thi lại" nếu muốn
+        int testId = getIntent().getIntExtra("testId", 1);
+        intent.putExtra("testId", testId);
+
         startActivity(intent);
         finish();
     }
+
 
     @Override
     protected void onDestroy() {

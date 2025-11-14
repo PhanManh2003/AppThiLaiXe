@@ -44,6 +44,9 @@
         <activity
             android:name=".ExamResultActivity"
             android:exported="true" />
+        <activity
+            android:name=".AnswerReviewActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

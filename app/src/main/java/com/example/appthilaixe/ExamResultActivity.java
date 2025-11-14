@@ -8,12 +8,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appthilaixe.models.AnswerReview;
+
+import java.util.ArrayList;
+
 public class ExamResultActivity extends AppCompatActivity {
 
     private TextView tvStatus, tvScore, tvPercentage, tvMessage;
     private TextView tvTotal, tvCorrect, tvWrong, tvSkipped, tvTime;
     private ImageView ivResultIcon;
-
+    private ArrayList<AnswerReview> answerReviews; // Danh sách câu trả lời
     private Button btnViewAnswers, btnRetake, btnHome;
 
     @Override
@@ -39,7 +43,7 @@ public class ExamResultActivity extends AppCompatActivity {
         tvSkipped = findViewById(R.id.tv_skipped_questions);
         tvTime = findViewById(R.id.tv_time_taken);
 
-//        btnViewAnswers = findViewById(R.id.btn_view_answers);
+        btnViewAnswers = findViewById(R.id.btn_review);
         btnRetake = findViewById(R.id.btn_retake);
         btnHome = findViewById(R.id.btn_home);
     }
@@ -50,6 +54,9 @@ public class ExamResultActivity extends AppCompatActivity {
         int wrong = getIntent().getIntExtra("wrong_answers", 0);
         int skipped = getIntent().getIntExtra("skipped_questions", 0);
         String timeTaken = getIntent().getStringExtra("time_taken");
+
+        // Nhận list AnswerReview
+        answerReviews = (ArrayList<AnswerReview>) getIntent().getSerializableExtra("answer_reviews");
 
         int percentage = (correct * 100) / total;
 
@@ -95,6 +102,16 @@ public class ExamResultActivity extends AppCompatActivity {
 
             // Đóng màn kết quả
             finish();
+        });
+
+        // Nút xem đáp án
+        btnViewAnswers.setOnClickListener(v -> {
+            if (answerReviews != null && !answerReviews.isEmpty()) {
+                Intent intent = new Intent(ExamResultActivity.this, AnswerReviewActivity.class);
+                intent.putExtra("title", "Xem đáp án");
+                intent.putExtra("answers", answerReviews);
+                startActivity(intent);
+            }
         });
 
     }
