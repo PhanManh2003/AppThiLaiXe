@@ -318,33 +318,33 @@
                 android:id="@+id/btn_review_answers"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="Xem Lại Đáp Án"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/btn_primary"
-                android:layout_marginBottom="12dp" />
+                android:text="Quay lại"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btn_continue_learning"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="Học Tiếp"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/primary_blue"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/btn_outline_blue"
-                android:layout_marginBottom="12dp" />
+                android:text="Học Tiếp"
+                android:textColor="@color/background_light"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btn_back_to_categories"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:background="@drawable/btn_outline_blue"
                 android:text="Về Danh Mục"
+                android:textColor="@color/background_light"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/primary_blue"
-                android:background="@drawable/btn_outline_blue" />
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
