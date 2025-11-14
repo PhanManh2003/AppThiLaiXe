@@ -41,6 +41,7 @@ public class CategoryQuestionsActivity extends AppCompatActivity {
 
     private List<Question> questions = new ArrayList<>();
     private int currentIndex = 0;
+    private TextView tvQuestionNumber;
 
     private int correctCount = 0;
     private int wrongCount = 0;
@@ -72,10 +73,10 @@ public class CategoryQuestionsActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        tvQuestionNumber = findViewById(R.id.tv_question_number);
         tvCategoryName = findViewById(R.id.tv_category_name);
         tvProgress = findViewById(R.id.tv_progress);
         tvQuestion = findViewById(R.id.tv_question);
-
         tvOptionA = findViewById(R.id.tv_option_a);
         tvOptionB = findViewById(R.id.tv_option_b);
         tvOptionC = findViewById(R.id.tv_option_c);
@@ -200,6 +201,8 @@ public class CategoryQuestionsActivity extends AppCompatActivity {
     }
 
     private void displayQuestion() {
+        tvQuestionNumber.setText("Câu " + (currentIndex + 1));
+
         if (questions.isEmpty()) return;
 
         Question q = questions.get(currentIndex);
@@ -233,6 +236,7 @@ public class CategoryQuestionsActivity extends AppCompatActivity {
             displayQuestion();
         } else {
             openResultScreen();
+
         }
     }
 
@@ -251,6 +255,7 @@ public class CategoryQuestionsActivity extends AppCompatActivity {
         intent.putExtra("total_questions", questions.size());
         intent.putExtra("correct_answers", correctCount);
         intent.putExtra("wrong_answers", wrongCount);
+        intent.putExtra("userId", userId);
 
         startActivity(intent);
         finish();

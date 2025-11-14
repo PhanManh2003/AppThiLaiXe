@@ -14,6 +14,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.example.appthilaixe.database.AppDatabase;
+
 public class CategoryQuestionResultActivity extends AppCompatActivity {
 
     private ImageView ivResultIcon;
@@ -30,12 +32,15 @@ public class CategoryQuestionResultActivity extends AppCompatActivity {
     private int correctAnswers;
     private int wrongAnswers;
     private int percentage;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_category_question_result);
+        Intent intent = getIntent();
+        userId = intent.getIntExtra("userId", 1);
 
         getLearningResults();
         initViews();
@@ -52,6 +57,7 @@ public class CategoryQuestionResultActivity extends AppCompatActivity {
         totalQuestions = intent.getIntExtra("total_questions", 0);
         correctAnswers = intent.getIntExtra("correct_answers", 0);
         wrongAnswers = intent.getIntExtra("wrong_answers", 0);
+        userId = intent.getIntExtra("userId", 1);
 
         if (categoryName == null || categoryName.isEmpty()) {
             categoryName = "Danh mục học tập";
@@ -71,7 +77,7 @@ public class CategoryQuestionResultActivity extends AppCompatActivity {
         tvCategoryProgress = findViewById(R.id.tv_category_progress);
         progressCategory = findViewById(R.id.progress_category);
 
-        btnReviewAnswers = findViewById(R.id.btn_review_answers);   // ⭐ NÚT XEM LẠI ĐÁP ÁN
+        btnReviewAnswers = findViewById(R.id.btn_review_answers);
         btnContinueLearning = findViewById(R.id.btn_continue_learning);
         btnBackToCategories = findViewById(R.id.btn_back_to_categories);
 
@@ -121,6 +127,7 @@ public class CategoryQuestionResultActivity extends AppCompatActivity {
             masteryColor = 0xFFF44336;
             message = "Đừng bỏ cuộc! Hãy học lại nhé!";
         }
+        updateStudyProgress();
 
         tvMasteryLevel.setText(masteryLevel);
         tvMasteryLevel.setTextColor(masteryColor);
@@ -130,17 +137,21 @@ public class CategoryQuestionResultActivity extends AppCompatActivity {
         tvCategoryProgress.setText(percentage + "%");
     }
 
+    private void updateStudyProgress() {
+        AppDatabase db = AppDatabase.getInstance(this);
+        int learned = totalQuestions;
+
+        db.studyDao().updateProgress(userId, categoryId, learned);
+    }
+
     private void setClickListeners() {
 
-        // ⭐ NÚT XEM LẠI ĐÁP ÁN = QUAY LẠI MÀN TRƯỚC
         btnReviewAnswers.setOnClickListener(v -> {
             finish();  // QUAY LẠI CategoryQuestionsActivity
         });
 
-        // Nút Học tiếp (cũng quay lại màn trước)
         btnContinueLearning.setOnClickListener(v -> finish());
 
-        // Nút quay về danh mục bài học
         btnBackToCategories.setOnClickListener(v -> {
             Intent intent = new Intent(CategoryQuestionResultActivity.this, LearningActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
