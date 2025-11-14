@@ -59,7 +59,7 @@
     {
       "questionId": 5,
       "lessonId": 2,
-      "questionTitle": "Loại biển báo có viền đỏ hình tròn?",
+      "questionTitle": "Loại biển báo nào có viền đỏ hình tròn?",
       "optionA": "Biển báo nguy hiểm",
       "optionB": "Biển báo cấm",
       "optionC": "Biển hiệu lệnh",
@@ -78,31 +78,31 @@
       "optionD": "Biển báo cấm",
       "correctAnswer": "A",
       "explanation": "Biển nền xanh là biển chỉ dẫn.",
-      "imagePath": ""
+      "imagePath": "https://cdn.thuvienphapluat.vn/uploads/tintuc/2022/10/15/bien-bao-R.301.jpg"
     },
     {
       "questionId": 7,
       "lessonId": 2,
-      "questionTitle": "Biển cấm người đi bộ?",
+      "questionTitle": "Đâu là biển báo gì?",
       "optionA": "Người đi bộ được phép qua đường",
       "optionB": "Cấm người đi bộ qua đường",
       "optionC": "Cảnh báo khu vực đông người qua lại",
       "optionD": "Chỉ dành cho xe máy",
       "correctAnswer": "B",
       "explanation": "Biển có hình người đi bộ gạch chéo là biển cấm người đi bộ.",
-      "imagePath": ""
+      "imagePath": "https://cdn-i.vtcnews.vn/resize/th/upload/2024/04/14/bien-cam-nguoi-di-bo-20440399.jpeg"
     },
     {
       "questionId": 8,
       "lessonId": 2,
-      "questionTitle": "Biển hình thoi màu vàng là gì?",
-      "optionA": "Đường ưu tiên",
-      "optionB": "Đường dành cho xe tải",
-      "optionC": "Đường cấm ô tô",
-      "optionD": "Đường giao nhau",
+      "questionTitle": "Biển có hình thoi màu vàng là loại gì?",
+      "optionA": "Biển cảnh báo nguy hiểm",
+      "optionB": "Biển hiệu lệnh",
+      "optionC": "Biển chỉ dẫn",
+      "optionD": "Biển cấm",
       "correctAnswer": "A",
-      "explanation": "Biển hình thoi màu vàng là biển chỉ đường ưu tiên.",
-      "imagePath": ""
+      "explanation": "Biển hình thoi màu vàng là nhóm biển cảnh báo nguy hiểm.",
+      "imagePath": "https://image.luatvietnam.vn/uploaded/twebp/images/original/2022/06/20/bien-bao-giao-thong-hinh-thoi-1_2006135658.jpg"
     },
     {
       "questionId": 9,

@@ -42,7 +42,7 @@ public class LearningActivity extends AppCompatActivity implements LessonAdapter
     private List<Question> allQuestions = new ArrayList<>();
     private List<Study> allStudies = new ArrayList<>();
 
-    private int userId = 1;  // sau nhận từ intent
+    private int userId = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,12 @@ public class LearningActivity extends AppCompatActivity implements LessonAdapter
         loadDataFromDB();
         setClickListeners();
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadDataFromDB();
+    }
+
 
     private void initViews() {
         btnBack = findViewById(R.id.btn_back);
@@ -158,6 +164,7 @@ public class LearningActivity extends AppCompatActivity implements LessonAdapter
         Intent intent = new Intent(this, CategoryQuestionsActivity.class);
         intent.putExtra("lessonId", lesson.lessonId);
         intent.putExtra("lessonName", lesson.lessonName);
+        intent.putExtra("userId", userId);
         startActivity(intent);
     }
 }

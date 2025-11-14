@@ -31,6 +31,9 @@ public interface StudyDao {
     @Query("UPDATE study SET learnedCount = :count WHERE userId = :userId AND lessonId = :lessonId")
     void updateLearned(int userId, int lessonId, int count);
 
+    @Query("UPDATE study SET learnedCount = :learned WHERE userId = :userId AND lessonId = :lessonId")
+    void updateProgress(int userId, int lessonId, int learned);
+
     @Query("DELETE FROM study")
     void deleteAll();
 }

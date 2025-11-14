@@ -76,9 +76,8 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // 🔹 BẮT BUỘC: Chạy kiểm tra database trên một luồng nền
+
         new Thread(() -> {
-            // Tác vụ này chạy ở luồng nền
             User user = userDao.login(email, password);
 
             runOnUiThread(() -> {
