@@ -41,6 +41,9 @@
         <activity
             android:name=".CategoryQuestionResultActivity"
             android:exported="true" />
+        <activity
+            android:name=".ExamResultActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

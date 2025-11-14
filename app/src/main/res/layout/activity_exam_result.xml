@@ -293,17 +293,6 @@
             android:layout_marginBottom="24dp">
 
             <Button
-                android:id="@+id/btn_view_answers"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="Xem Đáp Án"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:background="@drawable/btn_primary"
-                android:layout_marginBottom="12dp" />
-
-            <Button
                 android:id="@+id/btn_retake"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"

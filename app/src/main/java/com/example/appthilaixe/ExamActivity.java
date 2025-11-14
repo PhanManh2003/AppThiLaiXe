@@ -283,14 +283,28 @@ public class ExamActivity extends AppCompatActivity {
     private void navigateToResult() {
         calculateAnswers();
 
-        // TODO: chuyển sang Activity hiển thị kết quả
-        Toast.makeText(this, "Đã hoàn thành bài thi!\nĐúng: " + correctAnswersCount + " | Sai: " + wrongAnswersCount + " | Bỏ qua: " + skippedQuestionsCount, Toast.LENGTH_LONG).show();
+        long timeTakenMillis = initialTimeInMillis - timeLeftInMillis;
+        int minutes = (int) (timeTakenMillis / 1000) / 60;
+        int seconds = (int) (timeTakenMillis / 1000) % 60;
+        String timeTaken = String.format("%02d:%02d", minutes, seconds);
+
+        Intent intent = new Intent(ExamActivity.this, ExamResultActivity.class);
+        intent.putExtra("total_questions", totalQuestions);
+        intent.putExtra("correct_answers", correctAnswersCount);
+        intent.putExtra("wrong_answers", wrongAnswersCount);
+        intent.putExtra("skipped_questions", skippedQuestionsCount);
+        intent.putExtra("time_taken", timeTaken);
+
+        startActivity(intent);
+        finish();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         stopTimer();
     }
+
 // code cũ
 //    private void navigateToResult() {
 //        // Calculate time taken
