@@ -347,7 +347,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:layout_gravity="center"
-            android:minWidth="280dp"
+            android:minWidth="320dp"
             android:text="@string/learn_now"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -355,7 +355,24 @@
             android:textColor="@color/white"
             style="@style/Widget.MaterialComponents.Button" />
 
+        <!-- Exam History Button -->
+        <Button
+            android:id="@+id/btn_exam_history"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center"
+            android:minWidth="320dp"
+            android:text="Lịch sử thi"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/primary_orange"
+            android:textColor="@color/white"
+            style="@style/Widget.MaterialComponents.Button" />
+
     </LinearLayout>
 
 </ScrollView>
-

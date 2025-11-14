@@ -3,7 +3,6 @@ package com.example.appthilaixe;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,7 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appthilaixe.database.AppDatabase;
@@ -36,9 +34,8 @@ public class ExamActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private int currentQuestion = 1;
     private int totalQuestions = 0; // Lấy từ DB
-    private String selectedAnswer = "";
     private long timeLeftInMillis = 45 * 60 * 1000; // 45 phút
-    private long initialTimeInMillis = 45 * 60 * 1000;
+    private final long initialTimeInMillis = 45 * 60 * 1000;
 
     // Track answers
     private int correctAnswersCount = 0;
@@ -47,14 +44,14 @@ public class ExamActivity extends AppCompatActivity {
 
     // Store questions and user answers
     private List<Question> questions;
-    private Map<Integer, String> userAnswers = new HashMap<>();
+    // key: index câu hỏi (0..n-1), value: "A"/"B"/"C"/"D"
+    private final Map<Integer, String> userAnswers = new HashMap<>();
 
     private AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_exam);
 
         // Khởi tạo database
@@ -80,18 +77,22 @@ public class ExamActivity extends AppCompatActivity {
         tvTimer = findViewById(R.id.tv_timer);
         tvProgress = findViewById(R.id.tv_progress);
         tvQuestion = findViewById(R.id.tv_question);
+
         tvOptionA = findViewById(R.id.tv_option_a);
         tvOptionB = findViewById(R.id.tv_option_b);
         tvOptionC = findViewById(R.id.tv_option_c);
         tvOptionD = findViewById(R.id.tv_option_d);
+
         optionA = findViewById(R.id.option_a);
         optionB = findViewById(R.id.option_b);
         optionC = findViewById(R.id.option_c);
         optionD = findViewById(R.id.option_d);
+
         ivCheckA = findViewById(R.id.iv_check_a);
         ivCheckB = findViewById(R.id.iv_check_b);
         ivCheckC = findViewById(R.id.iv_check_c);
         ivCheckD = findViewById(R.id.iv_check_d);
+
         btnPrevious = findViewById(R.id.btn_previous);
         btnNext = findViewById(R.id.btn_next);
         btnBack = findViewById(R.id.btn_back);
@@ -108,6 +109,9 @@ public class ExamActivity extends AppCompatActivity {
 
         // Lấy danh sách câu hỏi theo testId
         questions = db.questionDao().getQuestionsByTestId(testId);
+        if (questions == null) {
+            questions = new ArrayList<>();
+        }
         totalQuestions = questions.size();
 
         if (totalQuestions == 0) {
@@ -131,10 +135,13 @@ public class ExamActivity extends AppCompatActivity {
     }
 
     private void loadQuestion() {
-        if (questions == null || questions.isEmpty()) return;
+        if (questions == null || questions.isEmpty() || currentQuestion < 1 || currentQuestion > totalQuestions) {
+            return;
+        }
 
         Question question = questions.get(currentQuestion - 1);
         questionNumber.setText("Câu " + currentQuestion);
+
         // Hiển thị câu hỏi và các đáp án
         tvQuestion.setText(question.getQuestionTitle());
         tvOptionA.setText(question.getOptionA());
@@ -157,108 +164,102 @@ public class ExamActivity extends AppCompatActivity {
     private void updateNavigationButtons() {
         btnPrevious.setEnabled(currentQuestion > 1);
         btnPrevious.setAlpha(currentQuestion > 1 ? 1.0f : 0.5f);
-        btnNext.setText(currentQuestion == totalQuestions ? "Hoàn Thành" : getString(R.string.next));
+
+
+        btnNext.setText(currentQuestion == totalQuestions
+                ? "Hoàn thành"
+                : getString(R.string.next));
     }
 
     private void selectAnswer(String answer) {
-        // Lưu đáp án người dùng vừa chọn vào biến tạm của activity
-        selectedAnswer = answer;
-        // Lưu đáp án này vào Map để theo dõi tất cả các câu hỏi
-        // key = index của câu hỏi (currentQuestion - 1 vì list bắt đầu từ 0)
-        // value = đáp án đã chọn ("A", "B", "C" hoặc "D")
+        // lưu lại đáp án cho câu hiện tại
         userAnswers.put(currentQuestion - 1, answer);
-        // Xóa tất cả các highlight / check mark cũ
+
         clearSelection();
 
         switch (answer) {
-            // Tô màu và hiển thị dấu check cho đáp án vừa chọn
-            case "A": optionA.setBackgroundResource(R.drawable.answer_option_selected);
-                ivCheckA.setVisibility(View.VISIBLE);
+            case "A":
+                optionA.setBackgroundResource(R.drawable.answer_option_selected);
+                ivCheckA.setVisibility(TextView.VISIBLE);
                 break;
-
-            case "B": optionB.setBackgroundResource(R.drawable.answer_option_selected);
-                ivCheckB.setVisibility(View.VISIBLE);
+            case "B":
+                optionB.setBackgroundResource(R.drawable.answer_option_selected);
+                ivCheckB.setVisibility(TextView.VISIBLE);
                 break;
-
-            case "C": optionC.setBackgroundResource(R.drawable.answer_option_selected);
-                ivCheckC.setVisibility(View.VISIBLE);
+            case "C":
+                optionC.setBackgroundResource(R.drawable.answer_option_selected);
+                ivCheckC.setVisibility(TextView.VISIBLE);
                 break;
-
-            case "D": optionD.setBackgroundResource(R.drawable.answer_option_selected);
-                ivCheckD.setVisibility(View.VISIBLE);
+            case "D":
+                optionD.setBackgroundResource(R.drawable.answer_option_selected);
+                ivCheckD.setVisibility(TextView.VISIBLE);
                 break;
         }
     }
 
     private void clearSelection() {
-        // Reset lại background của tất cả các option về trạng thái mặc định
         optionA.setBackgroundResource(R.drawable.answer_option_bg);
         optionB.setBackgroundResource(R.drawable.answer_option_bg);
         optionC.setBackgroundResource(R.drawable.answer_option_bg);
         optionD.setBackgroundResource(R.drawable.answer_option_bg);
 
-        // Ẩn tất cả các dấu check
-        ivCheckA.setVisibility(View.GONE);
-        ivCheckB.setVisibility(View.GONE);
-        ivCheckC.setVisibility(View.GONE);
-        ivCheckD.setVisibility(View.GONE);
+        ivCheckA.setVisibility(TextView.GONE);
+        ivCheckB.setVisibility(TextView.GONE);
+        ivCheckC.setVisibility(TextView.GONE);
+        ivCheckD.setVisibility(TextView.GONE);
     }
 
     private void nextQuestion() {
-        if (currentQuestion >= totalQuestions) {  // Kiểm tra xem đã là câu hỏi cuối cùng chưa
-            stopTimer();                        // Nếu là câu cuối cùng, dừng đồng hồ
-            navigateToResult();                  // Chuyển sang màn hình kết quả
-            return;                              // Thoát phương thức
+        if (totalQuestions == 0) {
+            return;
         }
 
-        currentQuestion++;   // Chưa phải câu cuối, tăng số câu hỏi hiện tại lên 1
-        loadQuestion();      // Tải câu hỏi mới lên giao diện
+        if (currentQuestion >= totalQuestions) {
+            // Câu cuối → dừng timer và chuyển sang màn kết quả
+            stopTimer();
+            navigateToResult();
+            return;
+        }
+
+        currentQuestion++;
+        loadQuestion();
     }
 
     private void previousQuestion() {
-        if (currentQuestion > 1) { // Chỉ cho phép quay lại nếu chưa phải câu hỏi đầu tiên
-            currentQuestion--; // Giảm số câu hỏi hiện tại
-            loadQuestion(); // Tải câu hỏi trước đó lên giao diện
+        if (currentQuestion > 1) {
+            currentQuestion--;
+            loadQuestion();
         }
     }
 
     private void updateProgress() {
-        // Hiển thị số câu hiện tại trên tổng số câu hỏi (VD: 5/40)
+        if (totalQuestions <= 0) {
+            tvProgress.setText("0/0");
+            progressBar.setProgress(0);
+            return;
+        }
         tvProgress.setText(currentQuestion + "/" + totalQuestions);
-        // Tính phần trăm tiến trình làm bài (VD: câu 20/40 → 50%)
         int progress = (currentQuestion * 100) / totalQuestions;
-        // Cập nhật giá trị cho thanh ProgressBar
         progressBar.setProgress(progress);
     }
 
     private void startTimer() {
-        // Tạo bộ đếm thời gian đếm ngược (CountDownTimer)
-        //Cứ 1 giây, phương thức onTick(long millisUntilFinished) sẽ được gọi một lần.
-        //Mỗi lần gọi, có thể cập nhật giao diện (ví dụ: hiển thị thời gian còn lại).
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                // Cập nhật thời gian còn lại mỗi giây
                 timeLeftInMillis = millisUntilFinished;
-
-                // Tính phút và giây còn lại
                 int minutes = (int) (timeLeftInMillis / 1000) / 60;
                 int seconds = (int) (timeLeftInMillis / 1000) % 60;
-
-                // Hiển thị thời gian theo định dạng mm:ss
                 tvTimer.setText(String.format("%02d:%02d", minutes, seconds));
             }
 
             @Override
             public void onFinish() {
-                // Khi hết thời gian, thông báo cho người dùng
                 Toast.makeText(ExamActivity.this, "Hết thời gian!", Toast.LENGTH_SHORT).show();
-                // Chuyển sang màn hình kết quả bài thi
                 navigateToResult();
             }
         }.start();
     }
-
 
     private void stopTimer() {
         if (countDownTimer != null) countDownTimer.cancel();
@@ -269,82 +270,87 @@ public class ExamActivity extends AppCompatActivity {
         wrongAnswersCount = 0;
         skippedQuestionsCount = 0;
 
+        if (questions == null) return;
+
         for (int i = 0; i < questions.size(); i++) {
             Question q = questions.get(i);
             String userAnswer = userAnswers.get(i);
 
             if (userAnswer != null && !userAnswer.isEmpty()) {
-                if (q.isCorrectAnswer(userAnswer)) correctAnswersCount++;
-                else wrongAnswersCount++;
-            } else skippedQuestionsCount++;
+                if (q.isCorrectAnswer(userAnswer)) {
+                    correctAnswersCount++;
+                } else {
+                    wrongAnswersCount++;
+                }
+            } else {
+                skippedQuestionsCount++;
+            }
         }
     }
 
+    /**
+     * Chuyển sang ExamResultActivity và truyền đầy đủ dữ liệu + answerReviews
+     */
     private void navigateToResult() {
+        if (questions == null || questions.isEmpty()) {
+            finish();
+            return;
+        }
+
+        // Tính thời gian đã làm
+        long timeTakenInMillis = initialTimeInMillis - timeLeftInMillis;
+        int minutes = (int) (timeTakenInMillis / 1000) / 60;
+        int seconds = (int) (timeTakenInMillis / 1000) % 60;
+        String timeTaken = String.format("%02d:%02d", minutes, seconds);
+
+        // Tính đúng/sai/bỏ qua
         calculateAnswers();
 
-        // TODO: chuyển sang Activity hiển thị kết quả
-        Toast.makeText(this, "Đã hoàn thành bài thi!\nĐúng: " + correctAnswersCount + " | Sai: " + wrongAnswersCount + " | Bỏ qua: " + skippedQuestionsCount, Toast.LENGTH_LONG).show();
+        // Tạo danh sách AnswerReview để xem lại đáp án
+        ArrayList<AnswerReview> answerReviews = new ArrayList<>();
+        for (int i = 0; i < questions.size(); i++) {
+            Question question = questions.get(i);
+            String userAnswer = userAnswers.get(i);
+
+            boolean answered = userAnswer != null && !userAnswer.isEmpty();
+            boolean correct = answered && question.isCorrectAnswer(userAnswer);
+
+            // TODO: nếu model Question có sẵn text đáp án đúng thì thay chuỗi rỗng này
+            String correctAnswerText = "";
+
+            AnswerReview review = new AnswerReview(
+                    i + 1,
+                    question.getQuestionTitle(),
+                    userAnswer,
+                    correctAnswerText,
+                    answered,
+                    correct
+            );
+            answerReviews.add(review);
+        }
+
+        // Lấy userId & testId đã truyền từ HomeActivity
+        int userId = getIntent().getIntExtra("userId", -1);
+        int testId = getIntent().getIntExtra("testId", 1);
+
+        // Gửi sang ExamResultActivity
+        Intent intent = new Intent(ExamActivity.this, ExamResultActivity.class);
+        intent.putExtra("total_questions", totalQuestions);
+        intent.putExtra("correct_answers", correctAnswersCount);
+        intent.putExtra("wrong_answers", wrongAnswersCount);
+        intent.putExtra("skipped_questions", skippedQuestionsCount);
+        intent.putExtra("time_taken", timeTaken);
+        intent.putExtra("answer_reviews", answerReviews);
+        intent.putExtra("userId", userId);
+        intent.putExtra("testId", testId);
+
+        startActivity(intent);
+        finish();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         stopTimer();
     }
-// code cũ
-//    private void navigateToResult() {
-//        // Calculate time taken
-//        long timeTakenInMillis = initialTimeInMillis - timeLeftInMillis;
-//        int minutes = (int) (timeTakenInMillis / 1000) / 60;
-//        int seconds = (int) (timeTakenInMillis / 1000) % 60;
-//        String timeTaken = String.format("%02d:%02d", minutes, seconds);
-//
-//        // Calculate actual correct/wrong/skipped answers
-//        calculateAnswers();
-//
-//        // Create answer review list
-//        ArrayList<AnswerReview> answerReviews = new ArrayList<>();
-//        for (int i = 0; i < questions.size(); i++) {
-//            Question question = questions.get(i);
-//            String userAnswer = userAnswers.get(i);
-//        }
-//
-//        // Create intent and pass data
-//        Intent intent = new Intent(ExamActivity.this, ExamResultActivity.class);
-//        intent.putExtra("total_questions", totalQuestions);
-//        intent.putExtra("correct_answers", correctAnswersCount);
-//        intent.putExtra("wrong_answers", wrongAnswersCount);
-//        intent.putExtra("skipped_questions", skippedQuestionsCount);
-//        intent.putExtra("time_taken", timeTaken);
-//        intent.putExtra("answer_reviews", answerReviews);
-//
-//        startActivity(intent);
-//        finish();
-//    }
-
-//    private void calculateAnswers() {
-//        correctAnswersCount = 0;
-//        wrongAnswersCount = 0;
-//        skippedQuestionsCount = 0;
-//
-//        // Check each question
-//        for (int i = 0; i < questions.size(); i++) {
-//            Question question = questions.get(i);
-//            String userAnswer = userAnswers.get(i);
-//
-//            if (userAnswer != null && !userAnswer.isEmpty()) {
-//                if (question.isCorrectAnswer(userAnswer)) {
-//                    correctAnswersCount++;
-//                } else {
-//                    wrongAnswersCount++;
-//                }
-//            } else {
-//                // No answer selected counts as skipped
-//                skippedQuestionsCount++;
-//            }
-//        }
-//    }
-
-
 }
-

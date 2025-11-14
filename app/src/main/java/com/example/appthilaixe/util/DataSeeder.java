@@ -23,6 +23,9 @@ public class DataSeeder {
         public List<Test> tests;
         @SerializedName("test_question")
         public List<TestQuestionCrossRef> testQuestionRefs;
+        @SerializedName("user_test_results")
+        public List<UserTestResult> userTestResults;
+
     }
 
     // File: DataSeeder.java

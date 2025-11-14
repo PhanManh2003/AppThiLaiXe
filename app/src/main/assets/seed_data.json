@@ -146,5 +146,10 @@
     { "testId": 1, "questionId": 8 },
     { "testId": 1, "questionId": 9 },
     { "testId": 1, "questionId": 10 }
+  ],
+  "user_test_results": [
+    { "userId": 1, "testId": 1, "result": 85.0 },
+    { "userId": 1, "testId": 1, "result": 60.0 },
+    { "userId": 1, "testId": 1, "result": 92.0 }
   ]
 }

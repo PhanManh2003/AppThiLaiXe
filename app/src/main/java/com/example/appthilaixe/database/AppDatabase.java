@@ -43,6 +43,8 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TestQuestionDao testQuestionDao();
 
+    public abstract UserTestResultDao userTestResultDao();
+
     /**
      * Hàm getInstance() trả về instance duy nhất của database.
      * Sử dụng double-checked locking để đảm bảo an toàn luồng.
